@@ -6,21 +6,29 @@
 package Modelo;
 
 
+import java.io.Serializable;
 import java.security.Timestamp;
+
 
 /**
  *
  * @author Marina Belén
  */
-public class Estacionamiento {
+
+public class Estacionamiento extends EntidadOID implements Serializable {
    private int idIngreso;
    private String patente;
    private String propietario;
    private Timestamp fechaIngreso;
    private Timestamp fechaSalida;
-   private  double importe;
+   private double importe;
    private Persona atendidoPor;
    private TarifaVehiculo tipoVehiculo;
+
+    public Estacionamiento() {
+    }
+   
+   
 
     public Estacionamiento(int idIngreso, String patente, String propietario, Timestamp fechaIngreso, Persona atendidoPor, TarifaVehiculo tipoVechiculo) {
         this.idIngreso = idIngreso;

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="Modelo.Turno" table="turno"> 
+        <id name="OID" type="int">
+            <column name="OIDTurno"/>
+            <generator class="uuid2"/>
+        </id>
+
+        <property name="precio" type="double">
+            <column name="precio"/>
+        </property>
+        
+         <property name="nombreTurno" type="string">
+            <column name="nombreTurno"/>
+        </property>
+
+   
+        
+
+    </class>
+    
+</hibernate-mapping>

@@ -4,15 +4,22 @@
  * and open the template in the editor.
  */
 package Modelo;
+import java.io.Serializable;
 
 /**
  *
  * @author Marina Belén
  */
-public class Puesto {
+
+public class Puesto extends EntidadOID implements Serializable {
     private int numPuesto;
     private boolean estadoPuesto;
     private Estacionamiento estacionamiento;
+
+    public Puesto() {
+    }
+    
+    
 
     public Puesto(int numPuesto, boolean estadoPuesto) {
         this.numPuesto = numPuesto;

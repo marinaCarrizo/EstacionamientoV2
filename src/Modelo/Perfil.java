@@ -4,27 +4,28 @@
  * and open the template in the editor.
  */
 package Modelo;
+import java.io.Serializable;
+
 
 /**
  *
  * @author Marina Belén
  */
-public class Perfil {
-    private int idPerfil;
+
+public class Perfil extends EntidadOID implements Serializable {
+  
     private String nombrePerfil;
 
-    public Perfil(int idPerfil, String nombrePerfil) {
-        this.idPerfil = idPerfil;
+    public Perfil() {
+    }
+
+    
+    public Perfil( String nombrePerfil) {
+        
         this.nombrePerfil = nombrePerfil;
     }
 
-    public int getIdPerfil() {
-        return idPerfil;
-    }
-
-    public void setIdPerfil(int idPerfil) {
-        this.idPerfil = idPerfil;
-    }
+   
 
     public String getNombrePerfil() {
         return nombrePerfil;

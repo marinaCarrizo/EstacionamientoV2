@@ -7,19 +7,28 @@ package Modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+
 
 /**
  *
  * @author Marina Belén
  */
-public class TarifaVehiculo {
+
+public class TarifaVehiculo extends EntidadOID implements Serializable {
+
     private String tipoVehiculo;
-    private List<Tarifa> tarifa;
+    private List<Turno> tarifa;
+
+    public TarifaVehiculo() {
+
+        tarifa = new ArrayList<Turno>();
+
+    }
 
     public TarifaVehiculo(String tipoVehiculo) {
         this.tipoVehiculo = tipoVehiculo;
-        tarifa=new ArrayList<Tarifa>();
-        
+
     }
 
     public String getTipoVehiculo() {
@@ -30,16 +39,12 @@ public class TarifaVehiculo {
         this.tipoVehiculo = tipoVehiculo;
     }
 
-    public List<Tarifa> getTarifa() {
+    public List<Turno> getTarifa() {
         return tarifa;
     }
 
-    public void setTarifa(List<Tarifa> tarifa) {
+    public void setTarifa(List<Turno> tarifa) {
         this.tarifa = tarifa;
     }
-    
-    
-    
-    
-    
+
 }

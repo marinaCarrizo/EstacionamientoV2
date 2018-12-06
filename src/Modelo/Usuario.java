@@ -4,32 +4,33 @@
  * and open the template in the editor.
  */
 package Modelo;
+import java.io.Serializable;
+
 
 /**
  *
  * @author Marina Belén
  */
-public class Usuario {
+
+public class Usuario extends EntidadOID implements Serializable {
     
-    private int idUsuario;
+   
     private String nombreUsuario;
-    private String Contraseña;
+    private String contrasenia;
     private Perfil perfilUsuario;
 
-    public Usuario(int idUsuario, String nombreUsuario, String Contraseña, Perfil perfilUsuario) {
-        this.idUsuario = idUsuario;
+    public Usuario() {
+    }
+    
+
+    public Usuario( String nombreUsuario, String contrasenia, Perfil perfilUsuario) {
+     
         this.nombreUsuario = nombreUsuario;
-        this.Contraseña = Contraseña;
+        this.contrasenia = contrasenia;
         this.perfilUsuario = perfilUsuario;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+   
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -39,12 +40,12 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public String getContraseña() {
-        return Contraseña;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
-    public void setContraseña(String Contraseña) {
-        this.Contraseña = Contraseña;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public Perfil getPerfilUsuario() {
