@@ -9,7 +9,7 @@ package Controlador;
  *
  * @author Marina Belén
  */
-public class EstacionamientoV1 {
+public class EstacionamientoV2 {
 
     /**
      * @param args the command line arguments
