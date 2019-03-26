@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2019 23:47:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Persona" table="persona" catalog="estacionamientov2" optimistic-lock="version">
+        <id name="idPersona" type="java.lang.Integer">
+            <column name="idPersona" />
+            <generator class="identity" />
+        </id>
+        <property name="nombrePersona" type="string">
+            <column name="nombrePersona" length="30" not-null="true" />
+        </property>
+        <property name="dniPersona" type="double">
+            <column name="dniPersona" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="direccionPersona" type="string">
+            <column name="direccionPersona" length="50" not-null="true" />
+        </property>
+        <property name="telefonoPersona" type="double">
+            <column name="telefonoPersona" precision="22" scale="0" not-null="true" />
+        </property>
+        <set name="estacionamientos" table="estacionamiento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPersona" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Estacionamiento" />
+        </set>
+        <one-to-one name="usuario" class="Modelo.Usuario"></one-to-one>
+    </class>
+</hibernate-mapping>

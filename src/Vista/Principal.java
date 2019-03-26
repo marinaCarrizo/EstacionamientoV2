@@ -5,7 +5,11 @@
  */
 package vista;
 
-import javax.swing.JOptionPane;
+import Vista.cruds.PuestosABM;
+import Vista.cruds.TurnosABM;
+import utils.UsuarioSingleton;
+
+
 
 
 /**
@@ -19,6 +23,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        permisos();
     }
 
     /**
@@ -32,170 +37,221 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnIngresar = new javax.swing.JButton();
-        btnRetirar = new javax.swing.JButton();
         btnReportes = new javax.swing.JButton();
         btnUsuarios = new javax.swing.JButton();
-        btnPuestos = new javax.swing.JButton();
+        btn_personas = new javax.swing.JButton();
         btnTarifas = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        logo_sistema = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menu_settings = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnIngresar.setFont(new java.awt.Font("Comic Sans MS", 1, 15)); // NOI18N
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.setName(""); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(774, 115));
+
+        btnIngresar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnIngresar.setText("Ingresar Vehiculo");
-        btnIngresar.setPreferredSize(new java.awt.Dimension(100, 23));
+        btnIngresar.setPreferredSize(new java.awt.Dimension(160, 100));
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnIngresar);
 
-        btnRetirar.setFont(new java.awt.Font("Comic Sans MS", 1, 15)); // NOI18N
-        btnRetirar.setText("Retirar Vehiculo");
-        btnRetirar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRetirarActionPerformed(evt);
-            }
-        });
-
-        btnReportes.setFont(new java.awt.Font("Comic Sans MS", 1, 15)); // NOI18N
+        btnReportes.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnReportes.setText("Reportes");
+        btnReportes.setPreferredSize(new java.awt.Dimension(95, 100));
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReportesActionPerformed(evt);
             }
         });
+        jPanel1.add(btnReportes);
 
-        btnUsuarios.setFont(new java.awt.Font("Comic Sans MS", 1, 15)); // NOI18N
+        btnUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnUsuarios.setText("Usuarios");
+        btnUsuarios.setPreferredSize(new java.awt.Dimension(93, 100));
         btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUsuariosActionPerformed(evt);
             }
         });
+        jPanel1.add(btnUsuarios);
 
-        btnPuestos.setFont(new java.awt.Font("Comic Sans MS", 1, 15)); // NOI18N
-        btnPuestos.setText("Puestos");
-        btnPuestos.addActionListener(new java.awt.event.ActionListener() {
+        btn_personas.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btn_personas.setText("Personas");
+        btn_personas.setPreferredSize(new java.awt.Dimension(95, 100));
+        btn_personas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPuestosActionPerformed(evt);
+                btn_personasActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_personas);
 
-        btnTarifas.setFont(new java.awt.Font("Comic Sans MS", 1, 15)); // NOI18N
+        btnTarifas.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnTarifas.setText("Tarifas");
+        btnTarifas.setPreferredSize(new java.awt.Dimension(79, 100));
         btnTarifas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTarifasActionPerformed(evt);
             }
         });
+        jPanel1.add(btnTarifas);
 
-        btnCerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesion");
+        btnCerrarSesion.setPreferredSize(new java.awt.Dimension(127, 100));
         btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarSesionActionPerformed(evt);
             }
         });
+        jPanel1.add(btnCerrarSesion);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnPuestos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnIngresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                            .addComponent(btnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnRetirar, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                            .addComponent(btnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTarifas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, 6))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnPuestos, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-                    .addComponent(btnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnTarifas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel2.setLayout(new java.awt.CardLayout());
+
+        logo_sistema.setFont(new java.awt.Font("MV Boli", 0, 48)); // NOI18N
+        logo_sistema.setForeground(new java.awt.Color(255, 0, 0));
+        logo_sistema.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logo_sistema.setText("PlayaSys");
+        logo_sistema.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        logo_sistema.setMaximumSize(new java.awt.Dimension(400, 407));
+        logo_sistema.setMinimumSize(new java.awt.Dimension(400, 407));
+        logo_sistema.setPreferredSize(new java.awt.Dimension(300, 307));
+        jPanel2.add(logo_sistema, "card2");
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        menu_settings.setText("Configuracion");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Perfiles");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menu_settings.add(jMenuItem1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Puestos");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        menu_settings.add(jMenuItem2);
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setText("Tipo de Vehiculos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        menu_settings.add(jMenuItem3);
+
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem4.setText("Usuarios");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        menu_settings.add(jMenuItem4);
+
+        jMenuBar1.add(menu_settings);
+
+        jMenu1.setText("Sistema");
+
+        jMenuItem5.setText("Cambiar Clave");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+        jMenu1.add(jSeparator1);
+
+        jMenuItem6.setText("Salir");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        Ingreso i = new Ingreso();
-        i.setVisible(true);
-        
+        new IngresoView().setVisible(true);
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        
+        System.exit(EXIT_ON_CLOSE);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
-    private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
-       Salida s = new Salida();
-       s.setVisible(true);
+    private void btn_personasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_personasActionPerformed
         
-    }//GEN-LAST:event_btnRetirarActionPerformed
-
-    private void btnPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuestosActionPerformed
-        Puestos p = new Puestos();
-        p.setVisible(true);
-    }//GEN-LAST:event_btnPuestosActionPerformed
+        new Vista.cruds.PersonasABM().setVisible(true);
+    }//GEN-LAST:event_btn_personasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-       Reporte r = new Reporte ();
-       r.setVisible(true);
+      new Reporte().setVisible(true);
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-       MenuUsuarios u = new MenuUsuarios();
-       u.setVisible(true);
+      new Vista.cruds.UsuariosABM().setVisible(true);
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnTarifasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarifasActionPerformed
-        Tarifa t = new Tarifa();
-        t.setVisible(true);
+       new TurnosABM().setVisible(true);
     }//GEN-LAST:event_btnTarifasActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new Vista.cruds.PerfilesABM().setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        new PuestosABM().setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        new Vista.cruds.TipoVehiculoABM().setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        new Vista.cruds.UsuariosABM().setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        new Vista.CambiarClave().setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+       System.exit(EXIT_ON_CLOSE);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,11 +291,65 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnIngresar;
-    private javax.swing.JButton btnPuestos;
     private javax.swing.JButton btnReportes;
-    private javax.swing.JButton btnRetirar;
     private javax.swing.JButton btnTarifas;
     private javax.swing.JButton btnUsuarios;
+    private javax.swing.JButton btn_personas;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JLabel logo_sistema;
+    private javax.swing.JMenu menu_settings;
     // End of variables declaration//GEN-END:variables
+
+    private void permisos() {
+        
+        switch (UsuarioSingleton.getInstance().getUsuario().getPerfil().getNombrePerfil()){
+            case "admin":
+                
+                btnIngresar.setEnabled(true);
+                btnReportes.setEnabled(true);
+                btnTarifas.setEnabled(true);
+                btnUsuarios.setEnabled(true);
+                btn_personas.setEnabled(true);
+                jMenuItem1.setEnabled(true);
+                jMenuItem2.setEnabled(true);
+                jMenuItem3.setEnabled(true);
+                jMenuItem4.setEnabled(true);
+                
+                break;
+            case "administrativo":
+                btnIngresar.setEnabled(false);
+                btnReportes.setEnabled(true);
+                btnTarifas.setEnabled(false);
+                btnUsuarios.setEnabled(false);
+                btn_personas.setEnabled(false);
+                jMenuItem1.setEnabled(false);
+                jMenuItem2.setEnabled(false);
+                jMenuItem3.setEnabled(false);
+                jMenuItem4.setEnabled(false);
+                break;
+            case "operario":
+                btnIngresar.setEnabled(true);
+                btnReportes.setEnabled(false);
+                btnTarifas.setEnabled(false);
+                btnUsuarios.setEnabled(false);
+                btn_personas.setEnabled(false);
+                jMenuItem1.setEnabled(false);
+                jMenuItem2.setEnabled(false);
+                jMenuItem3.setEnabled(false);
+                jMenuItem4.setEnabled(false);
+                break;
+        }
+        btnCerrarSesion.setEnabled(true);
+        
+    }
 }

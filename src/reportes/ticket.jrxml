@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ticket" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32425ccf-a176-4911-9cce-c539eede7d5d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="d153a087-f686-4af7-a7f2-10ea54f63623">
+		<queryString language="hql">
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="patente" class="java.lang.String"/>
+	<parameter name="tipovehiculo" class="java.lang.String"/>
+	<parameter name="propietario" class="java.lang.String"/>
+	<parameter name="horaentrada" class="java.lang.String"/>
+	<parameter name="horasalida" class="java.lang.String"/>
+	<parameter name="total" class="java.lang.String"/>
+	<parameter name="ticketnro" class="java.lang.String"/>
+	<parameter name="usuario" class="java.lang.String"/>
+	<parameter name="fecha_entrada" class="java.lang.String"/>
+	<parameter name="fecha_salida" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="308" splitType="Stretch">
+			<staticText>
+				<reportElement x="213" y="13" width="118" height="43" uuid="d41a88c8-b572-46f1-b811-2f1cf689f5cf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[PlayaSys]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="89" width="100" height="20" uuid="efad1f5c-f3ac-4aa5-84b6-366f7b889b22"/>
+				<text><![CDATA[Patente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="109" width="100" height="20" uuid="94cb7017-59c1-4e9a-9c4a-48b05be30c66"/>
+				<text><![CDATA[Propietario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="129" width="100" height="20" uuid="85b276ae-abec-413b-9873-c5c390ecbbaa"/>
+				<text><![CDATA[Tipo de Vehiculo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="168" width="100" height="20" uuid="74144d78-041a-4545-a3f2-752a55a8d220"/>
+				<text><![CDATA[Hora de entrada:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="207" width="100" height="20" uuid="8d46ca43-3975-4d7d-949b-5c7fa624f295"/>
+				<text><![CDATA[Hora de salida:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="247" width="100" height="20" uuid="a7809e28-64fc-4ac9-b0a8-4fb056c3f62e"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="271" y="89" width="100" height="20" uuid="2aca8b0f-1dc8-436f-a560-cb3408adb88b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{patente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="129" width="100" height="20" uuid="4af81810-6a1d-40a8-84df-35ec8c85264f"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{tipovehiculo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="109" width="100" height="20" uuid="7e654dcb-64b9-495b-a33d-e6bb7093e11b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{propietario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="168" width="100" height="20" uuid="1ca2e58d-af40-4230-ab9a-9beb6b94fd4c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{horaentrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="207" width="100" height="20" uuid="b504157e-7566-4b7f-aa6f-364f04a28379"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{horasalida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="247" width="100" height="20" uuid="bbc0c5c4-e264-4aea-be6e-f63ca09eb9b5"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="171" y="69" width="100" height="20" uuid="7b8e93b5-a850-4d5d-81dd-92b34693f185"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[Ticket n°: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="271" y="69" width="100" height="20" uuid="f8c13f07-6385-4d89-bbe3-79288b593872"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{ticketnro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="171" y="227" width="100" height="20" uuid="1480ba1d-9e81-49cb-aace-efe0a08f6d2c"/>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="271" y="227" width="100" height="20" uuid="62b1774d-c8a1-47e1-98fe-ff45d5cf132b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="148" width="100" height="20" uuid="6126d048-9d5f-40bc-8587-d7dbd554e764"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{fecha_entrada}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="171" y="148" width="100" height="20" uuid="61afd919-90aa-4333-919b-e6ea219de309"/>
+				<text><![CDATA[Fecha entrada:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="271" y="188" width="100" height="20" uuid="bbfec3cc-4b9e-456a-be8d-990687c5d651"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{fecha_salida}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="171" y="188" width="100" height="20" uuid="df7e1d0f-cab0-4217-9a37-f5df41f4ad17"/>
+				<text><![CDATA[Fecha salida:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="9" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

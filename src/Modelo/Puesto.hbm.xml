@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2019 23:47:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Puesto" table="puesto" catalog="estacionamientov2" optimistic-lock="version">
+        <id name="idPuesto" type="java.lang.Integer">
+            <column name="idPuesto" />
+            <generator class="identity" />
+        </id>
+        <property name="numPuesto" type="string">
+            <column name="numPuesto" not-null="true" />
+        </property>
+        <property name="estadoPuesto" type="boolean">
+            <column name="estadoPuesto" not-null="true" />
+        </property>
+        <set name="estacionamientos" table="estacionamiento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPuesto" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Estacionamiento" />
+        </set>
+    </class>
+</hibernate-mapping>

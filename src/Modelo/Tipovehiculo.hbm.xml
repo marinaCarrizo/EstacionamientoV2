@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2019 23:47:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Tipovehiculo" table="tipovehiculo" catalog="estacionamientov2" optimistic-lock="version">
+        <id name="idTipoVehiculo" type="java.lang.Integer">
+            <column name="idTipoVehiculo" />
+            <generator class="identity" />
+        </id>
+        <property name="tipoVehiculo" type="string">
+            <column name="tipoVehiculo" length="10" not-null="true" />
+        </property>
+        <set name="turnos" table="turno" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idTipoVehiculo" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Turno" />
+        </set>
+        <set name="estacionamientos" table="estacionamiento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idTipoVehiculo" />
+            </key>
+            <one-to-many class="Modelo.Estacionamiento" />
+        </set>
+    </class>
+</hibernate-mapping>

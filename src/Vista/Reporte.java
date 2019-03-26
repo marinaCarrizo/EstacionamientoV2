@@ -5,6 +5,31 @@
  */
 package vista;
 
+import BDEstacionamientoV2.HibernateUtil;
+import Expertos.Experto;
+import Expertos.ExpertoEstacionamiento;
+import Expertos.ExpertoFactory;
+import Modelo.Estacionamiento;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
+import net.sf.jasperreports.swing.JRViewer;
+import org.hibernate.Session;
+import utils.FunctionsTools;
+
 /**
  *
  * @author Marina Belén
@@ -14,7 +39,12 @@ public class Reporte extends javax.swing.JFrame {
     /**
      * Creates new form Reporte
      */
+    private ExpertoEstacionamiento experto;
+
+    List<Object> ingresos;
+    
     public Reporte() {
+        experto = new ExpertoEstacionamiento();
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -38,9 +68,9 @@ public class Reporte extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Reportes", 0, 0, new java.awt.Font("Calibri", 1, 24))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Reportes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 24))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel1.setText("Desde");
@@ -48,11 +78,16 @@ public class Reporte extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel2.setText("Hasta");
 
-        txtDesde.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        txtDesde.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("d/MM/yyyy"))));
 
-        txtHasta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        txtHasta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("d/MM/yyyy"))));
 
         btnGenerar.setText("Generar");
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -61,9 +96,9 @@ public class Reporte extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("dd/mm/aa");
+        jLabel3.setText("dd/mm/aaaa");
 
-        jLabel4.setText("dd/mm/aa");
+        jLabel4.setText("dd/mm/aaaa");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,7 +122,7 @@ public class Reporte extends javax.swing.JFrame {
                                 .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel3)
-                                .addContainerGap(19, Short.MAX_VALUE))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,6 +168,25 @@ public class Reporte extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+        if (!txtDesde.getText().trim().equals("") && !txtHasta.getText().trim().equals("")) {
+            try {
+                String pattern = "dd/MM/yyyy";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+                Timestamp desde = new Timestamp(simpleDateFormat.parse(txtDesde.getText()).getTime());
+                Timestamp hasta = new Timestamp(simpleDateFormat.parse(txtHasta.getText()).getTime());
+                
+                gemerarReporte(desde,hasta);
+                
+            } catch (ParseException ex) {
+                Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Todos los campos deben estar completos");
+        }
+    }//GEN-LAST:event_btnGenerarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,4 +234,46 @@ public class Reporte extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtDesde;
     private javax.swing.JFormattedTextField txtHasta;
     // End of variables declaration//GEN-END:variables
+
+    private void gemerarReporte(Timestamp desde, Timestamp hasta) {
+        List<Estacionamiento> lista = experto.searchDesdeHasta(desde,hasta);
+        double total = 0;
+        for (Estacionamiento e : lista) {
+            if(e.getImporte() != null){
+                total += e.getImporte();
+            }
+        }
+        
+        try {
+            Map map = new HashMap();
+            JasperPrint print;
+            JDialog reporte = new JDialog();
+            reporte.setSize(850, 700);
+            reporte.setModal(true);
+            reporte.setTitle("Ticket");
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            map.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, session);
+            map.put("total_recaudacion", "$" + String.format("%.2f", total));
+
+//            URL reportTemplate = getClass().getClassLoader().getResource("reportes/ticket.jrxml");
+//            JasperReport jasperReport = JasperCompileManager.compileReport(reportTemplate.getPath());
+            print = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("reportes/operaciones.jasper"), map, new JRBeanCollectionDataSource(lista));
+
+            JRViewer jv = new JRViewer(print);
+            reporte.getContentPane().add(jv);
+
+            reporte.setVisible(true);
+
+            reporte.addComponentListener(new java.awt.event.ComponentAdapter() {
+                private void setAlwaysOnTop() {
+
+                    setAlwaysOnTop();
+                }
+            });
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(null, "Error: \n" + ex, "Error", JOptionPane.ERROR_MESSAGE);
+
+            ex.printStackTrace();
+        }
+    }
 }

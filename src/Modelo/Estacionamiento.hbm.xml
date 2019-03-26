@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2019 23:47:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Estacionamiento" table="estacionamiento" catalog="estacionamientov2" optimistic-lock="version">
+        <id name="numeroTicket" type="java.lang.Integer">
+            <column name="numeroTicket" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="persona" class="Modelo.Persona" fetch="select">
+            <column name="idPersona" not-null="true" />
+        </many-to-one>
+        <many-to-one name="puesto" class="Modelo.Puesto" fetch="select">
+            <column name="idPuesto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipovehiculo" class="Modelo.Tipovehiculo" fetch="select">
+            <column name="idTipoVehiculo" />
+        </many-to-one>
+        <property name="patente" type="string">
+            <column name="patente" length="10" not-null="true" />
+        </property>
+        <property name="propietario" type="string">
+            <column name="propietario" length="20" not-null="true" />
+        </property>
+        <property name="fechaIngreso" type="timestamp">
+            <column name="fechaIngreso" length="19" not-null="true" />
+        </property>
+        <property name="fechaSalida" type="timestamp">
+            <column name="fechaSalida" length="19" />
+        </property>
+        <property name="importe" type="java.lang.Double">
+            <column name="importe" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

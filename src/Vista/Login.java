@@ -5,7 +5,15 @@
  */
 package vista;
 
+import Expertos.Experto;
+import Expertos.ExpertoFactory;
+import Expertos.ExpertoUsuario;
+import Modelo.Persona;
+import Modelo.Usuario;
+import java.awt.Cursor;
 import javax.swing.JOptionPane;
+import utils.UsuarioSingleton;
+
 
 
 /**
@@ -14,11 +22,14 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
+    ExpertoUsuario ue;
+
     /**
      * Creates new form login
      */
     public Login() {
         initComponents();
+        ue = new ExpertoUsuario();
     }
 
     /**
@@ -122,13 +133,32 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-       
+        loguear();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void txtContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaActionPerformed
-        // TODO add your handling code here:
+        loguear();// TODO add your handling code here:
     }//GEN-LAST:event_txtContraseniaActionPerformed
+    private void loguear(){
+        this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        String user = txtUsuario.getText();
+        String pass = txtContrasenia.getText();
+        
+        Usuario u = (Usuario)ue.find(user);
+        Experto ep = new ExpertoFactory().getExperto("Persona");
+        u.setPersona((Persona) ep.search(String.valueOf(u.getIdPersona())).get(0));
+        if(u != null && u.getContrasenia().equals(pass)){
+            this.dispose();
+            UsuarioSingleton.getInstance().setUsuario(u);
+            new Principal().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.","ERROR!", JOptionPane.ERROR_MESSAGE);
+            txtContrasenia.setText("");
+        }
 
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -140,7 +170,7 @@ public class Login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

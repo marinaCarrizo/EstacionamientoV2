@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2019 23:47:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Turno" table="turno" catalog="estacionamientov2" optimistic-lock="version">
+        <id name="idTurno" type="java.lang.Integer">
+            <column name="idTurno" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tipovehiculo" class="Modelo.Tipovehiculo" fetch="select">
+            <column name="idTipoVehiculo" not-null="true" />
+        </many-to-one>
+        <property name="nombreTurno" type="string">
+            <column name="nombreTurno" length="20" not-null="true" />
+        </property>
+        <property name="precio" type="double">
+            <column name="precio" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="inicio" type="time">
+            <column name="inicio" length="8" />
+        </property>
+        <property name="fin" type="time">
+            <column name="fin" length="8" />
+        </property>
+    </class>
+</hibernate-mapping>

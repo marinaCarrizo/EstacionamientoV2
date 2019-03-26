@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2019 23:47:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Perfil" table="perfil" catalog="estacionamientov2" optimistic-lock="version">
+        <id name="idPerfil" type="java.lang.Integer">
+            <column name="idPerfil" />
+            <generator class="identity" />
+        </id>
+        <property name="nombrePerfil" type="string">
+            <column name="nombrePerfil" length="20" not-null="true" />
+        </property>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPerfil" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Usuario" />
+        </set>
+    </class>
+</hibernate-mapping>
