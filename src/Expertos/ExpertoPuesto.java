@@ -87,7 +87,6 @@ public class ExpertoPuesto implements Experto {
         } catch (HibernateException he) {
             he.printStackTrace();
         }
-        
         return 0;
     }
 
