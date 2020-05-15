@@ -9,28 +9,29 @@ import Expertos.Experto;
 import Expertos.ExpertoFactory;
 import Modelo.Usuario;
 import javax.swing.JOptionPane;
-import utils.UsuarioSingleton;
 
 /**
  *
- * @author VICTOR
+ * @author MARINA
  */
 public class CambiarClave extends javax.swing.JFrame {
 
     /**
      * Creates new form CambiarClave
      */
-    
     private Experto experto;
     private Usuario uEdit;
-    
-    public CambiarClave() {
+    private Login login;
+    private String username;
+
+    public CambiarClave(String username) {
         initComponents();
         this.setLocationRelativeTo(this);
 
         ExpertoFactory expertoFactory = new ExpertoFactory();
         experto = expertoFactory.getExperto("Usuario");
-        uEdit = UsuarioSingleton.getInstance().getUsuario();
+        this.username=username;
+        uEdit = (Usuario) experto.find(username);
     }
 
     /**
@@ -43,8 +44,6 @@ public class CambiarClave extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel4 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        psw_old_pass = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         psw_new_pass = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
@@ -57,10 +56,6 @@ public class CambiarClave extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Cambiar Clave"));
-
-        jLabel3.setText("Clave actual:");
-
-        psw_old_pass.setText("jPasswordField1");
 
         jLabel6.setText("Nueva clave:");
 
@@ -104,32 +99,25 @@ public class CambiarClave extends javax.swing.JFrame {
                     .addComponent(lbl_message_psw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator2)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(psw_old_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(psw_repeat_pass)
-                            .addComponent(psw_new_pass)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_save_pass)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_cancel_pass)))
+                            .addComponent(psw_repeat_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                            .addComponent(psw_new_pass))))
                 .addContainerGap())
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(btn_save_pass)
+                .addGap(49, 49, 49)
+                .addComponent(btn_cancel_pass)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(psw_old_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -141,11 +129,11 @@ public class CambiarClave extends javax.swing.JFrame {
                     .addComponent(psw_repeat_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_message_psw)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_cancel_pass)
-                    .addComponent(btn_save_pass))
-                .addContainerGap())
+                    .addComponent(btn_save_pass)
+                    .addComponent(btn_cancel_pass))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -181,69 +169,45 @@ public class CambiarClave extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancel_passActionPerformed
 
     private void btn_save_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_save_passActionPerformed
-        System.out.println("old pass: " + uEdit.getContrasenia() + " txt-> " + psw_old_pass.getText());
+
         System.out.println("new pass: " + psw_new_pass.getText());
         System.out.println("repeat pass: " + psw_repeat_pass.getText());
-        if (psw_repeat_pass.getText().equals(psw_new_pass.getText()) && !psw_new_pass.getText().trim().equals("") && psw_old_pass.getText().equals(uEdit.getContrasenia())) {
+        forgotPassword();
+
+    }//GEN-LAST:event_btn_save_passActionPerformed
+
+    private void saveData(Usuario u) {
+        if (experto.persist(u, "edit") == 1) {
+            JOptionPane.showMessageDialog(this, "Datos guardados correctamente");
+        }
+    }
+
+    public void forgotPassword() {
+
+        if (psw_repeat_pass.getText().equals(psw_new_pass.getText())&& !psw_new_pass.getText().trim().equals("")) {
             uEdit.setContrasenia(psw_new_pass.getText());
             saveData(uEdit);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "ERROR!", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btn_save_passActionPerformed
-    
-    private void saveData(Usuario u) {
-        if (experto.persist(u, "edit") == 1) {
-            JOptionPane.showMessageDialog(this, "Datos guardados correctamente");
-        }
+       
     }
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CambiarClave.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CambiarClave.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CambiarClave.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CambiarClave.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CambiarClave().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancel_pass;
     private javax.swing.JButton btn_save_pass;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lbl_message_psw;
     private javax.swing.JPasswordField psw_new_pass;
-    private javax.swing.JPasswordField psw_old_pass;
     private javax.swing.JPasswordField psw_repeat_pass;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Marina Belén
+ * @author MARINA
  */
 public class PersonasABM extends javax.swing.JFrame {
     

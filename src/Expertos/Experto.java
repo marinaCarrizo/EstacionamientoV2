@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author VICTOR
+ * @author MARINA
  */
 public interface Experto {
     

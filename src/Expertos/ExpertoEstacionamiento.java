@@ -17,7 +17,7 @@ import org.hibernate.Session;
 
 /**
  *
- * @author VICTOR
+ * @author MARINA
  */
 public class ExpertoEstacionamiento implements Experto{
     

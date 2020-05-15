@@ -7,7 +7,7 @@ package Expertos;
 
 /**
  *
- * @author VICTOR
+ * @author MARINA
  */
 public class ExpertoFactory {
     

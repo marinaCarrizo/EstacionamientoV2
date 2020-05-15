@@ -28,7 +28,7 @@ import javax.swing.table.TableModel;
 
 /**
  *
- * @author Marina Belén
+ * @author MARINA
  */
 public class UsuariosABM extends javax.swing.JFrame {
 

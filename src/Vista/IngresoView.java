@@ -9,20 +9,15 @@ import BDEstacionamientoV2.HibernateUtil;
 import Expertos.Experto;
 import Expertos.ExpertoFactory;
 import Expertos.ExpertoPuesto;
-import Expertos.ExpertoTipoVehiculo;
 import Modelo.Estacionamiento;
 import Modelo.Tipovehiculo;
 import Modelo.Puesto;
 import Modelo.Turno;
-import java.net.URL;
-import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,25 +26,19 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
-import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.swing.JRViewer;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import utils.FunctionsTools;
 import utils.UsuarioSingleton;
 
 /**
  *
- * @author Marina Belén
+ * @author MARINA
  */
 public class IngresoView extends javax.swing.JFrame {
 
@@ -118,9 +107,9 @@ public class IngresoView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_propietario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cbx_tipovehiculos = new javax.swing.JComboBox<>();
+        cbx_tipovehiculos = new javax.swing.JComboBox<String>();
         jLabel4 = new javax.swing.JLabel();
-        cbx_puestos = new javax.swing.JComboBox<>();
+        cbx_puestos = new javax.swing.JComboBox<String>();
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -294,7 +283,12 @@ public class IngresoView extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel4.setText("Puesto");
 
-        cbx_puestos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
+        cbx_puestos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar" }));
+        cbx_puestos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_puestosActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -569,6 +563,10 @@ public class IngresoView extends javax.swing.JFrame {
     private void chk_ver_todoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_ver_todoActionPerformed
         cargarTabla(null);
     }//GEN-LAST:event_chk_ver_todoActionPerformed
+
+    private void cbx_puestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_puestosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_puestosActionPerformed
 
     private void registrarSalida() {
         if (tabla_ingresos.getSelectedRow() == -1 || ((Estacionamiento) ingresos.get(tabla_ingresos.getSelectedRow())).getFechaSalida() != null) {

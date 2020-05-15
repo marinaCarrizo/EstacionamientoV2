@@ -9,7 +9,7 @@ import Modelo.Usuario;
 
 /**
  *
- * @author VICTOR
+ * @author MARINA
  */
 public class UsuarioSingleton {
     private static UsuarioSingleton instance;

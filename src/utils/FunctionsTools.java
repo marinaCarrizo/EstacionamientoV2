@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  *
- * @author VICTOR
+ * @author MARINA
  */
 public class FunctionsTools {
     public static String formatearFechaHora(long time){

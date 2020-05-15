@@ -32,7 +32,7 @@ import utils.FunctionsTools;
 
 /**
  *
- * @author Marina Belén
+ * @author MARINA
  */
 public class Reporte extends javax.swing.JFrame {
 

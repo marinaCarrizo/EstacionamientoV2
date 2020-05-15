@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Marina Belén
+ * @author MARINA
  */
 public class PerfilesABM extends javax.swing.JFrame {
     
