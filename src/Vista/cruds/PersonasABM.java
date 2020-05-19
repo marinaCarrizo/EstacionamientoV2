@@ -92,6 +92,7 @@ public class PersonasABM extends javax.swing.JFrame {
                 break;
             case "save":
             case "cancel":
+            case "Limpiar":
             default:
                 btn_save.setEnabled(false);
                 btn_cancel.setEnabled(false);
@@ -134,6 +135,7 @@ public class PersonasABM extends javax.swing.JFrame {
         btn_add = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
+        btn_Limpar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_dni = new javax.swing.JTextField();
@@ -204,6 +206,13 @@ public class PersonasABM extends javax.swing.JFrame {
             }
         });
 
+        btn_Limpar.setText("Limpiar");
+        btn_Limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -211,13 +220,15 @@ public class PersonasABM extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(133, 133, 133)
+                        .addGap(40, 40, 40)
                         .addComponent(txt_search)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_search))
+                        .addGap(20, 20, 20)
+                        .addComponent(btn_search)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_Limpar))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_add)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -233,7 +244,8 @@ public class PersonasABM extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_search))
+                    .addComponent(btn_search)
+                    .addComponent(btn_Limpar))
                 .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -369,6 +381,7 @@ public class PersonasABM extends javax.swing.JFrame {
         if(experto.delete(pEdit) == 1){
             JOptionPane.showMessageDialog(this, "Datos borrados correctamente");
         }
+        clearDetail();
         cargarTabla(null);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
@@ -414,6 +427,16 @@ public class PersonasABM extends javax.swing.JFrame {
         pEdit = (Persona)personas.get(jTable1.getSelectedRow());
         loadDetail();// TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseReleased
+
+    private void btn_LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LimparActionPerformed
+
+        txt_search.setEnabled(true);
+        txt_search.setText("");
+        clearDetail();
+        cargarTabla(null);
+        this.operation = "Limpar";
+        alterView(); // TODO add your handling code here:
+    }//GEN-LAST:event_btn_LimparActionPerformed
 
     private void loadDetail(){
         txt_dni.setText(String.format("%.0f",pEdit.getDniPersona()));
@@ -480,6 +503,7 @@ public class PersonasABM extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Limpar;
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_cancel;
     private javax.swing.JButton btn_delete;

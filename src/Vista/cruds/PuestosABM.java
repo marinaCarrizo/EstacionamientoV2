@@ -335,6 +335,7 @@ public class PuestosABM extends javax.swing.JFrame {
         if(experto.delete(pEdit) == 1){
             JOptionPane.showMessageDialog(this, "Datos borrados correctamente");
         }
+        clearDetail();
         cargarTabla(null);
     }//GEN-LAST:event_btn_deleteActionPerformed
 

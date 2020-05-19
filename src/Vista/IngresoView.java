@@ -103,15 +103,15 @@ public class IngresoView extends javax.swing.JFrame {
         lbl_deta_nro_ticket = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txt_patente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txt_propietario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cbx_tipovehiculos = new javax.swing.JComboBox<String>();
+        cbx_tipovehiculos = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        cbx_puestos = new javax.swing.JComboBox<String>();
+        cbx_puestos = new javax.swing.JComboBox<>();
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
+        txt_patente = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_ingresos = new javax.swing.JTable();
@@ -120,6 +120,7 @@ public class IngresoView extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btn_search_ingreso = new javax.swing.JButton();
         chk_ver_todo = new javax.swing.JCheckBox();
+        btn_Limpar = new javax.swing.JButton();
 
         item_registrar_salida.setText("Registrar Salida");
         item_registrar_salida.addActionListener(new java.awt.event.ActionListener() {
@@ -272,7 +273,7 @@ public class IngresoView extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingresar Vehículo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jLabel1.setText("Patente");
+        jLabel1.setText("  Patente/Identificador");
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel2.setText("Propietario");
@@ -280,10 +281,16 @@ public class IngresoView extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel3.setText("Tipo de Vehiculo");
 
+        cbx_tipovehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_tipovehiculosActionPerformed(evt);
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel4.setText("Puesto");
 
-        cbx_puestos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar" }));
+        cbx_puestos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
         cbx_puestos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_puestosActionPerformed(evt);
@@ -308,61 +315,53 @@ public class IngresoView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cbx_tipovehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_propietario, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_patente, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbx_puestos, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(57, 57, 57))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(jLabel4)
-                .addContainerGap(79, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbx_puestos, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_patente, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbx_tipovehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(67, 67, 67)
-                                .addComponent(jLabel2)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel3))
+                            .addComponent(txt_propietario, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(7, 7, 7)
+                .addComponent(cbx_tipovehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_propietario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_patente, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_propietario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbx_tipovehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbx_puestos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -409,7 +408,7 @@ public class IngresoView extends javax.swing.JFrame {
             }
         });
 
-        btn_search_ingreso.setText("Busacar");
+        btn_search_ingreso.setText("Buscar");
         btn_search_ingreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_search_ingresoActionPerformed(evt);
@@ -423,6 +422,13 @@ public class IngresoView extends javax.swing.JFrame {
             }
         });
 
+        btn_Limpar.setText("Limpiar");
+        btn_Limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -430,19 +436,21 @@ public class IngresoView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_patente_search, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_patente_search, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_search_ingreso)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Limpar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(chk_ver_todo)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1))))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,7 +459,8 @@ public class IngresoView extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(txt_patente_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_search_ingreso)
-                    .addComponent(chk_ver_todo))
+                    .addComponent(chk_ver_todo)
+                    .addComponent(btn_Limpar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -465,7 +474,7 @@ public class IngresoView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -483,42 +492,48 @@ public class IngresoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        Experto et = new ExpertoFactory().getExperto("Turno");
-        List<Object> turnos_list = et.search(null);
-        Timestamp fecha_ingreso = new Timestamp(Calendar.getInstance().getTimeInMillis());
-        boolean open_service = false;
-        
-        Calendar c = Calendar.getInstance();
-        Time hora = Time.valueOf(LocalTime.now());
-        for (Object o : turnos_list) {
-            Turno t = (Turno) o;
-            if (t.getInicio().getTime() < hora.getTime()) {
-                open_service = true;
-                break;
-            }
-        }
-        if (open_service) {
-            try {
-                Estacionamiento e = new Estacionamiento();
-                e.setPatente(txt_patente.getText().toUpperCase());
-                e.setPropietario(txt_propietario.getText().toUpperCase());
-                e.setPuesto(lista_puestos.get(cbx_puestos.getSelectedIndex()));
-                e.setTipovehiculo(lista_tVehiulos.get(cbx_tipovehiculos.getSelectedIndex()));
-                e.setPersona(UsuarioSingleton.getInstance().getUsuario().getPersona());
-                e.setFechaIngreso(fecha_ingreso);
+        if (txt_patente.getText().equals("") || txt_propietario.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Complete los campos vacios.", "Error", JOptionPane.ERROR_MESSAGE);
 
-                if (experto.persist(e, Experto.ADD) > 0) {
-                    JOptionPane.showMessageDialog(this, "Ingreso registrado!", "Info", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+
+            Experto et = new ExpertoFactory().getExperto("Turno");
+            List<Object> turnos_list = et.search(null);
+            Timestamp fecha_ingreso = new Timestamp(Calendar.getInstance().getTimeInMillis());
+            boolean open_service = false;
+
+            Calendar c = Calendar.getInstance();
+            Time hora = Time.valueOf(LocalTime.now());
+            for (Object o : turnos_list) {
+                Turno t = (Turno) o;
+                if (t.getInicio().getTime() < hora.getTime()) {
+                    open_service = true;
+                    break;
                 }
-                loadComboPuestos();
-                cargarTabla(null);
-                clearForm();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al guardar el registro:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                e.printStackTrace();
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Error al guardar el registro:\nLa hora de ingreso no coincide con los turnos disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
+            if (open_service) {
+                try {
+                    Estacionamiento e = new Estacionamiento();
+                    e.setPatente(txt_patente.getText().toUpperCase());
+                    e.setPropietario(txt_propietario.getText().toUpperCase());
+                    e.setPuesto(lista_puestos.get(cbx_puestos.getSelectedIndex()));
+                    e.setTipovehiculo(lista_tVehiulos.get(cbx_tipovehiculos.getSelectedIndex()));
+                    e.setPersona(UsuarioSingleton.getInstance().getUsuario().getPersona());
+                    e.setFechaIngreso(fecha_ingreso);
+
+                    if (experto.persist(e, Experto.ADD) > 0) {
+                        JOptionPane.showMessageDialog(this, "Ingreso registrado!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    loadComboPuestos();
+                    cargarTabla(null);
+                    clearForm();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Error al guardar el registro:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al guardar el registro:\nLa hora de ingreso no coincide con los turnos disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -529,6 +544,7 @@ public class IngresoView extends javax.swing.JFrame {
     private void btn_search_ingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_search_ingresoActionPerformed
         if (!txt_patente_search.getText().trim().equals("")) {
             cargarTabla(txt_patente_search.getText().trim());
+            txt_patente_search.setEnabled(false);
         }
     }//GEN-LAST:event_btn_search_ingresoActionPerformed
 
@@ -568,27 +584,40 @@ public class IngresoView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbx_puestosActionPerformed
 
+    private void btn_LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LimparActionPerformed
+
+        txt_patente_search.setEnabled(true);
+        txt_patente_search.setText("");
+        cargarTabla(null); // TODO add your handling code here:
+    }//GEN-LAST:event_btn_LimparActionPerformed
+
+    private void cbx_tipovehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_tipovehiculosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_tipovehiculosActionPerformed
+
     private void registrarSalida() {
         if (tabla_ingresos.getSelectedRow() == -1 || ((Estacionamiento) ingresos.get(tabla_ingresos.getSelectedRow())).getFechaSalida() != null) {
-            return;
+            JOptionPane.showMessageDialog(this, "Seleccione un vehiculo", "ERROR!", JOptionPane.ERROR_MESSAGE);
+            //return;
+        } else {
+            Estacionamiento e = (Estacionamiento) ingresos.get(tabla_ingresos.getSelectedRow());
+            e.setPersona(UsuarioSingleton.getInstance().getUsuario().getPersona());
+
+            Timestamp salida = new Timestamp(Calendar.getInstance().getTimeInMillis());
+            e.setFechaSalida(salida);
+            e.getPuesto().setEstadoPuesto(false);
+
+            Experto ep = new ExpertoFactory().getExperto("Puesto");
+            ep.persist(e.getPuesto(), Experto.EDIT);
+            //imprimimos reporte
+            double total = calcularTotal(e);
+            e.setImporte(total);
+
+            experto.persist(e, Experto.EDIT);
+            printTicket(e, total);
+            cargarTabla(null);
+            loadComboPuestos();
         }
-        Estacionamiento e = (Estacionamiento) ingresos.get(tabla_ingresos.getSelectedRow());
-        e.setPersona(UsuarioSingleton.getInstance().getUsuario().getPersona());
-
-        Timestamp salida = new Timestamp(Calendar.getInstance().getTimeInMillis());
-        e.setFechaSalida(salida);
-        e.getPuesto().setEstadoPuesto(false);
-
-        Experto ep = new ExpertoFactory().getExperto("Puesto");
-        ep.persist(e.getPuesto(), Experto.EDIT);
-        //imprimimos reporte
-        double total = calcularTotal(e);
-        e.setImporte(total);
-
-        experto.persist(e, Experto.EDIT);
-        printTicket(e, total);
-        cargarTabla(null);
-        loadComboPuestos();
     }
 
     private double calcularTotal(Estacionamiento e) {
@@ -601,19 +630,22 @@ public class IngresoView extends javax.swing.JFrame {
 
         //14400000 son 4 horas en milisegundos
         int turnos = Math.round((float) horas / 14400000);
+        if (turnos < 1) {
+            turnos = 1;
+        }
         //si llego de dia
         Time hora_entrada = Time.valueOf(FunctionsTools.formatearHora(e.getFechaIngreso().getTime()));
         Time hora_salida = Time.valueOf(FunctionsTools.formatearHora(e.getFechaSalida().getTime()));
 
         for (int i = 0; i < turnos_list.size(); i++) {
             Turno t = (Turno) turnos_list.get(i);
-            Turno t_next = null;
-            if (i < turnos_list.size() - 1) {
-                t_next = (Turno) turnos_list.get(i + 1);
-            }
+            //Turno t_next = null;
+            //if (i < turnos_list.size() - 1) {
+              //  t_next = (Turno) turnos_list.get(i + 1);
+           // }
             if (t.getTipovehiculo().getIdTipoVehiculo() == e.getTipovehiculo().getIdTipoVehiculo()
                     && t.getInicio().getTime() <= hora_entrada.getTime()
-                    && (t_next == null || t_next.getInicio().getTime() > hora_entrada.getTime())) {
+                    && t.getFin().getTime() >= hora_salida.getTime()) {
                 //entonces cobramos en torno a la tarifa del horario al que ingreso
                 costo_turno = t.getPrecio();
                 break;
@@ -766,6 +798,7 @@ public class IngresoView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btn_Limpar;
     private javax.swing.JButton btn_search_ingreso;
     private javax.swing.JComboBox<String> cbx_puestos;
     private javax.swing.JComboBox<String> cbx_tipovehiculos;
@@ -811,7 +844,13 @@ public class IngresoView extends javax.swing.JFrame {
     private void clearForm() {
         txt_patente.setText("");
         txt_propietario.setText("");
-        cbx_puestos.setSelectedIndex(0);
+        try {
+            cbx_puestos.setSelectedIndex(0);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No quedan mas puestos disponibles", "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+
         cbx_tipovehiculos.setSelectedIndex(0);
     }
 }

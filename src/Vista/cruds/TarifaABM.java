@@ -5,7 +5,6 @@
  */
 package Vista.cruds;
 
-
 import Expertos.Experto;
 import Expertos.ExpertoFactory;
 import Expertos.ExpertoPerfil;
@@ -26,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utils.FunctionsTools;
 import utils.UsuarioSingleton;
+
 ;
 
 /**
@@ -33,61 +33,60 @@ import utils.UsuarioSingleton;
  * @author MARINA
  */
 public class TarifaABM extends javax.swing.JFrame {
-    
-    
 
     /**
      * Creates new form Puestos
      */
-    
     private Experto experto;
     private String operation = "";
     private List<Object> turnos;
-    private Turno  tEdit;
-    
+    private Turno tEdit;
+
     private List<Tipovehiculo> lista_tipoVehiculo;
+
     public TarifaABM() {
-        
+
         initComponents();
-        
+
         this.setLocationRelativeTo(this);
-        
+
         ExpertoFactory expertoFactory = new ExpertoFactory();
         experto = expertoFactory.getExperto("Turno");
-        
+
         cargarTabla(null);
         cargarPerfiles();
         alterView();
     }
-    
-    private void cargarPerfiles(){
+
+    private void cargarPerfiles() {
         lista_tipoVehiculo = new ArrayList<Tipovehiculo>();
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         List lista = new ExpertoTipoVehiculo().search(null);
         for (Object o : lista) {
-            Tipovehiculo p = (Tipovehiculo)o;
+            Tipovehiculo p = (Tipovehiculo) o;
             lista_tipoVehiculo.add(p);
             model.addElement((p.getTipoVehiculo()));
         }
         this.cbx_tipovehi.setModel(model);
     }
-    
-    private void cargarTabla(String param){
-        
+
+    private void cargarTabla(String param) {
+
         Vector<String> tableHeaders = new Vector<String>();
         tableHeaders.add("Código");
         tableHeaders.add("Detalle");
         tableHeaders.add("Tipo");
         tableHeaders.add("Precio");
         this.turnos = experto.search(param);
-        tbl_turnos.setModel(new DefaultTableModel(this.displayResult(this.turnos), tableHeaders ){
-            boolean[] canEdit = new boolean [] {false, false,false,false};
+        tbl_turnos.setModel(new DefaultTableModel(this.displayResult(this.turnos), tableHeaders) {
+            boolean[] canEdit = new boolean[]{false, false, false, false};
+
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
     }
-    
+
     private Vector displayResult(List resultList) {
         Vector tableData = new Vector();
 
@@ -97,24 +96,24 @@ public class TarifaABM extends javax.swing.JFrame {
             oneRow.add(turno.getIdTurno());
             oneRow.add(turno.getNombreTurno());
             oneRow.add(turno.getTipovehiculo().getTipoVehiculo());
-            oneRow.add("$"+String.format("%.0f", turno.getPrecio()));
+            oneRow.add("$" + String.format("%.0f", turno.getPrecio()));
             tableData.add(oneRow);
         }
         return tableData;
     }
-    
-    private void alterView(){
-        switch (this.operation){
+
+    private void alterView() {
+        switch (this.operation) {
             case "add":
             case "edit":
                 btn_save.setEnabled(true);
                 btn_cancel.setEnabled(true);
                 txt_detalle.setEnabled(true);
-                txt_inicio.setEditable(true);
+                txt_inicio.setEnabled(true);
                 txt_fin.setEnabled(true);
                 cbx_tipovehi.setEnabled(true);
                 txt_precio.setEnabled(true);
-                
+
                 btn_add.setEnabled(false);
                 btn_edit.setEnabled(false);
                 btn_delete.setEnabled(false);
@@ -124,15 +123,16 @@ public class TarifaABM extends javax.swing.JFrame {
                 break;
             case "save":
             case "cancel":
+            case "Limpiar":
             default:
                 btn_save.setEnabled(false);
                 btn_cancel.setEnabled(false);
                 txt_detalle.setEnabled(false);
-                txt_inicio.setEditable(false);
+                txt_inicio.setEnabled(false);
                 txt_fin.setEnabled(false);
                 cbx_tipovehi.setEnabled(false);
                 txt_precio.setEnabled(false);
-                
+
                 btn_add.setEnabled(true);
                 btn_edit.setEnabled(true);
                 btn_delete.setEnabled(true);
@@ -142,7 +142,7 @@ public class TarifaABM extends javax.swing.JFrame {
                 break;
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -161,6 +161,7 @@ public class TarifaABM extends javax.swing.JFrame {
         btn_add = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
+        btn_Limpar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btn_save = new javax.swing.JButton();
         btn_cancel = new javax.swing.JButton();
@@ -174,10 +175,12 @@ public class TarifaABM extends javax.swing.JFrame {
         txt_inicio = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         txt_fin = new javax.swing.JFormattedTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Turnos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 24))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tarifas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 24))); // NOI18N
 
         tbl_turnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -233,6 +236,13 @@ public class TarifaABM extends javax.swing.JFrame {
             }
         });
 
+        btn_Limpar.setText("Limpiar");
+        btn_Limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -243,10 +253,12 @@ public class TarifaABM extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(133, 133, 133)
+                        .addGap(28, 28, 28)
                         .addComponent(txt_search)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_search))
+                        .addGap(31, 31, 31)
+                        .addComponent(btn_search)
+                        .addGap(19, 19, 19)
+                        .addComponent(btn_Limpar))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_add)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -262,7 +274,8 @@ public class TarifaABM extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_search))
+                    .addComponent(btn_search)
+                    .addComponent(btn_Limpar))
                 .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -297,7 +310,11 @@ public class TarifaABM extends javax.swing.JFrame {
 
         jLabel8.setText("Precio ($):");
 
-        txt_precio.setText("0,00");
+        txt_precio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_precioActionPerformed(evt);
+            }
+        });
         txt_precio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_precioKeyReleased(evt);
@@ -312,6 +329,10 @@ public class TarifaABM extends javax.swing.JFrame {
         jLabel3.setText("Fin:");
 
         txt_fin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.MEDIUM))));
+
+        jLabel6.setText("00:00:00 hs");
+
+        jLabel7.setText("$0.0");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -328,19 +349,21 @@ public class TarifaABM extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbx_tipovehi, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_detalle, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel7))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_inicio)
                             .addComponent(txt_fin, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel6))
+                    .addComponent(txt_detalle, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbx_tipovehi, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -360,19 +383,29 @@ public class TarifaABM extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txt_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txt_fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(txt_fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel6)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel8))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btn_save)
                         .addGap(10, 10, 10)
                         .addComponent(btn_cancel)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -396,11 +429,14 @@ public class TarifaABM extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel1.getAccessibleContext().setAccessibleName("Tarifas");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         cargarTabla(txt_search.getText().trim());
+        txt_search.setEnabled(false);
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
@@ -415,19 +451,20 @@ public class TarifaABM extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        tEdit = (Turno)turnos.get(tbl_turnos.getSelectedRow());
+        tEdit = (Turno) turnos.get(tbl_turnos.getSelectedRow());
         loadDetail();// TODO add your handling code here:
-        if(experto.delete(tEdit) == 1){
+        if (experto.delete(tEdit) == 1) {
             JOptionPane.showMessageDialog(this, "Datos borrados correctamente");
         }
+        clearDetail();
         cargarTabla(null);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
-        
-        if(validForm()){
-            if(this.operation == Experto.ADD){
-                try{
+
+        if (validForm()) {
+            if (this.operation == Experto.ADD) {
+                try {
                     Turno newTurno = new Turno();
                     newTurno.setNombreTurno(txt_detalle.getText());
                     newTurno.setPrecio(Float.parseFloat(txt_precio.getText()));
@@ -435,19 +472,21 @@ public class TarifaABM extends javax.swing.JFrame {
                     newTurno.setFin(Time.valueOf(txt_fin.getText()));
                     newTurno.setTipovehiculo(lista_tipoVehiculo.get(cbx_tipovehi.getSelectedIndex()));
                     saveData(newTurno);
-                }catch(NumberFormatException e){
-                    JOptionPane.showMessageDialog(this, "El valor ingresado no es decimal con punto flotante", "Error!", JOptionPane.ERROR_MESSAGE);
+                } catch (IllegalArgumentException e) {
+                    JOptionPane.showMessageDialog(this, "Para ingresar hora de inicio y fin ingrese numeros con el formato 00:00:00.\n "
+                            + "Para ingresar precio ingrese numeros con el formato 0.0 ", "Error!", JOptionPane.ERROR_MESSAGE);
                 }
-            }else{
-                try{
+            } else {
+                try {
                     tEdit.setNombreTurno(txt_detalle.getText().trim());
                     tEdit.setPrecio(Float.parseFloat(txt_precio.getText()));
                     tEdit.setInicio(Time.valueOf(txt_inicio.getText()));
                     tEdit.setFin(Time.valueOf(txt_fin.getText()));
                     tEdit.setTipovehiculo(lista_tipoVehiculo.get(cbx_tipovehi.getSelectedIndex()));
                     saveData(tEdit);
-                }catch(NumberFormatException e){
-                    JOptionPane.showMessageDialog(this, "El valor ingresado no es decimal con punto flotante", "Error!", JOptionPane.ERROR_MESSAGE);
+                } catch (IllegalArgumentException e) {
+                    JOptionPane.showMessageDialog(this, "Para ingresar hora de inicio y fin ingrese numeros con el formato 00:00:00.\n "
+                            + "Para ingresar precio ingrese numeros con el formato 0.0 ", "Error!", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -458,60 +497,75 @@ public class TarifaABM extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_saveActionPerformed
 
     private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
-        
+
         clearDetail();
-        
+
         this.operation = "cancel";
         alterView();
     }//GEN-LAST:event_btn_cancelActionPerformed
 
     private void tbl_turnosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_turnosKeyReleased
-        tEdit = (Turno)turnos.get(tbl_turnos.getSelectedRow());
+        tEdit = (Turno) turnos.get(tbl_turnos.getSelectedRow());
         loadDetail();
-        
+
     }//GEN-LAST:event_tbl_turnosKeyReleased
 
     private void tbl_turnosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_turnosMouseReleased
-        tEdit = (Turno)turnos.get(tbl_turnos.getSelectedRow());
+        tEdit = (Turno) turnos.get(tbl_turnos.getSelectedRow());
         loadDetail();// TODO add your handling code here:
     }//GEN-LAST:event_tbl_turnosMouseReleased
 
     private void txt_precioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_precioKeyReleased
         char car = evt.getKeyChar();
-        if((car<'0' || car>'9') && (car<',' || car>'.')) evt.consume();
+        if ((car < '0' || car > '9') && (car < ',' || car > '.')) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txt_precioKeyReleased
 
-    private void loadDetail(){
+    private void btn_LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LimparActionPerformed
+        txt_search.setEnabled(true);
+        txt_search.setText("");
+        clearDetail();
+        cargarTabla(null);
+        this.operation = "Limpar";
+        alterView();        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_LimparActionPerformed
+
+    private void txt_precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_precioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_precioActionPerformed
+
+    private void loadDetail() {
         txt_detalle.setText(tEdit.getNombreTurno());
-        txt_precio.setText(""+tEdit.getPrecio());
+        txt_precio.setText("" + tEdit.getPrecio());
         txt_inicio.setText(FunctionsTools.formatearHora(tEdit.getInicio().getTime()));
         txt_fin.setText(FunctionsTools.formatearHora(tEdit.getFin().getTime()));
         cbx_tipovehi.setSelectedItem(tEdit.getTipovehiculo().getTipoVehiculo());
     }
-    private void clearDetail(){
+
+    private void clearDetail() {
         txt_precio.setText("");
         txt_detalle.setText("");
         txt_inicio.setText("00:00");
         txt_fin.setText("00:00");
         cbx_tipovehi.setSelectedIndex(0);
     }
-    
-    
-    private boolean validForm(){
-        if(!txt_detalle.getText().trim().equals("") && !txt_precio.getText().trim().equals("") ){
+
+    private boolean validForm() {
+        if (!txt_detalle.getText().trim().equals("") && !txt_precio.getText().trim().equals("")) {
             return true;
-        }else{
-            JOptionPane.showMessageDialog(this, "El nombre no debe ser vacio", "Error!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "El campo no debe ser vacio", "Error!", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
-    
-    private void saveData(Turno tv){
-        if(experto.persist(tv,operation) == 1){
+
+    private void saveData(Turno tv) {
+        if (experto.persist(tv, operation) == 1) {
             JOptionPane.showMessageDialog(this, "Datos guardados correctamente");
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -551,6 +605,7 @@ public class TarifaABM extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Limpar;
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_cancel;
     private javax.swing.JButton btn_delete;
@@ -563,6 +618,8 @@ public class TarifaABM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -371,7 +371,7 @@ public class Principal extends javax.swing.JFrame {
                 jMenuItem4.setEnabled(true);
 
                 break;
-            case "administrativo":
+            case "contador":
                 btnIngresar.setEnabled(false);
                 btnIngresar.setVisible(false);
                 btnReportes.setEnabled(true);
@@ -399,6 +399,7 @@ public class Principal extends javax.swing.JFrame {
             case "operario":
                 btnIngresar.setEnabled(true);
                 btnReportes.setEnabled(true);
+                btnPuestos.setEnabled(true);
                 btnReportes.setVisible(false);
                 btnTarifas.setEnabled(false);
                 btnTarifas.setVisible(false);

@@ -59,7 +59,6 @@ public class Login extends javax.swing.JFrame {
         btnOlvideContraseña = new javax.swing.JButton();
 
         dlg_forgot_password.setMaximumSize(new java.awt.Dimension(400, 163));
-        dlg_forgot_password.setName("dialog0"); // NOI18N
         dlg_forgot_password.setPreferredSize(new java.awt.Dimension(400, 163));
 
         jPanel2.setToolTipText("");
@@ -174,9 +173,9 @@ public class Login extends javax.swing.JFrame {
             .addGap(0, 163, Short.MAX_VALUE)
             .addGroup(dlg_forgot_passwordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlg_forgot_passwordLayout.createSequentialGroup()
-                    .addContainerGap(32, Short.MAX_VALUE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(31, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel2.getAccessibleContext().setAccessibleName("Cambiar contraseña");
@@ -286,16 +285,16 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContraseniaActionPerformed
 
     private void btnOlvideContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOlvideContraseñaActionPerformed
-        if(txtUsuario.getText().trim().equals("")){
+        if (txtUsuario.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Ingrese nombre de usuario primero", "ERROR!", JOptionPane.ERROR_MESSAGE);
-            
-        }else{
-        uEdit = (Usuario) ue.find(txtUsuario.getText());
-        dlg_forgot_password.setSize(450, 275);
-        dlg_forgot_password.setVisible(true);
-        dlg_forgot_password.setLocationRelativeTo(this);
-        dlg_forgot_password.setModal(true);
-        clearPasswords(); // TODO add your handling code here:
+
+        } else {
+            uEdit = (Usuario) ue.find(txtUsuario.getText());
+            dlg_forgot_password.setSize(450, 275);
+            dlg_forgot_password.setVisible(true);
+            dlg_forgot_password.setLocationRelativeTo(this);
+            dlg_forgot_password.setModal(true);
+            clearPasswords(); // TODO add your handling code here:
         }
     }//GEN-LAST:event_btnOlvideContraseñaActionPerformed
 
@@ -317,33 +316,43 @@ public class Login extends javax.swing.JFrame {
         forgotPassword();
     }//GEN-LAST:event_btn_save_passActionPerformed
     private void loguear() {
-        if(txtUsuario.getText().trim().equals("")){
+        if (txtUsuario.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Ingrese usuario y contraseña", "ERROR!", JOptionPane.ERROR_MESSAGE);
-        }else{
-        this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-        String user = txtUsuario.getText();
-        String pass = txtContrasenia.getText();
-
-        Usuario u = (Usuario) ue.find(user);
-        Experto ep = new ExpertoFactory().getExperto("Persona");
-        u.setPersona((Persona) ep.search(String.valueOf(u.getIdPersona())).get(0));
-        if (u != null && u.getContrasenia().equals(pass)) {
-            this.dispose();
-            UsuarioSingleton.getInstance().setUsuario(u);
-            new Principal().setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "ERROR!", JOptionPane.ERROR_MESSAGE);
-            txtContrasenia.setText("");
-        }}
+            try{
+            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            String user = txtUsuario.getText();
+            String pass = txtContrasenia.getText();
+
+            Usuario u = (Usuario) ue.find(user);
+
+            Experto ep = new ExpertoFactory().getExperto("Persona");
+
+            if (u != null && u.getContrasenia().equals(pass)) {
+                u.setPersona((Persona) ep.search(String.valueOf(u.getIdPersona())).get(0));
+                this.dispose();
+                UsuarioSingleton.getInstance().setUsuario(u);
+                new Principal().setVisible(true);
+            }  else {
+
+                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                txtContrasenia.setText("");
+            }
+            }catch(IndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(this, "Usuario inexistente.", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                txtContrasenia.setText("");
+                txtUsuario.setText("");
+            }
+        }
 
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
 
     public void forgotPassword() {
-
-        if (psw_repeat_pass.getText().equals(psw_new_pass.getText()) && !psw_new_pass.getText().trim().equals("")) {
+        if(psw_repeat_pass.getText().equals("")&&psw_new_pass.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Complete los campos requeridos", "ERROR!", JOptionPane.ERROR_MESSAGE);
+        }else if (psw_repeat_pass.getText().equals(psw_new_pass.getText()) && !psw_new_pass.getText().trim().equals("")) {
             uEdit.setContrasenia(psw_new_pass.getText());
-
             dlg_forgot_password.dispose();
             saveData(uEdit);
         } else {

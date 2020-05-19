@@ -135,6 +135,7 @@ public class UsuariosABM extends javax.swing.JFrame {
                 txt_username.setEnabled(true);
                 cbx_perfil.setEnabled(true);
                 btn_search_person.setEnabled(true);
+                btn_Cambiar_Clave.setEnabled(true);
 
                 btn_add.setEnabled(false);
                 btn_edit.setEnabled(false);
@@ -145,12 +146,14 @@ public class UsuariosABM extends javax.swing.JFrame {
                 break;
             case "save":
             case "cancel":
+            case "Limpiar":
             default:
                 btn_save.setEnabled(false);
                 btn_cancel.setEnabled(false);
                 txt_username.setEnabled(false);
                 cbx_perfil.setEnabled(false);
                 btn_search_person.setEnabled(false);
+                btn_Cambiar_Clave.setEnabled(false);
 
                 btn_add.setEnabled(true);
                 btn_edit.setEnabled(true);
@@ -202,8 +205,8 @@ public class UsuariosABM extends javax.swing.JFrame {
         btn_add = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        btn_Limpar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btn_save = new javax.swing.JButton();
@@ -214,6 +217,8 @@ public class UsuariosABM extends javax.swing.JFrame {
         cbx_perfil = new javax.swing.JComboBox<>();
         btn_search_person = new javax.swing.JButton();
         txt_username = new javax.swing.JTextField();
+        btn_Cambiar_Clave = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel de busqueda"));
 
@@ -453,30 +458,24 @@ public class UsuariosABM extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cambiar Clave");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        btn_Limpar.setText("Limpiar");
+        btn_Limpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_LimparActionPerformed(evt);
             }
         });
-
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(133, 133, 133)
-                        .addComponent(txt_search)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_search))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_add)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_edit)
@@ -484,9 +483,15 @@ public class UsuariosABM extends javax.swing.JFrame {
                         .addComponent(btn_delete)
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(56, 56, 56)
+                        .addComponent(txt_search)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_search)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_Limpar)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -495,7 +500,8 @@ public class UsuariosABM extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_search))
+                    .addComponent(btn_search)
+                    .addComponent(btn_Limpar))
                 .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -504,8 +510,7 @@ public class UsuariosABM extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btn_edit)
                         .addComponent(btn_add)
-                        .addComponent(btn_delete)
-                        .addComponent(jButton2)))
+                        .addComponent(btn_delete)))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
@@ -542,37 +547,44 @@ public class UsuariosABM extends javax.swing.JFrame {
             }
         });
 
+        btn_Cambiar_Clave.setText("Cambiar Contraseña");
+        btn_Cambiar_Clave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Cambiar_ClaveActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Contraseña:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(1, 1, 1)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbx_perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(txt_name_person, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_search_person))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(txt_username))))
+                                .addComponent(btn_search_person)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbx_perfil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_Cambiar_Clave)
+                            .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -593,7 +605,10 @@ public class UsuariosABM extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Cambiar_Clave)
+                    .addComponent(jLabel3)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -622,6 +637,7 @@ public class UsuariosABM extends javax.swing.JFrame {
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         cargarTabla(txt_search.getText().trim());
+        txt_search.setEnabled(false);
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
@@ -641,6 +657,7 @@ public class UsuariosABM extends javax.swing.JFrame {
         if (experto.delete(uEdit) == 1) {
             JOptionPane.showMessageDialog(this, "Datos borrados correctamente");
         }
+        clearDetail();
         cargarTabla(null);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
@@ -710,7 +727,7 @@ public class UsuariosABM extends javax.swing.JFrame {
 
     }//GEN-LAST:event_psw_repeat_passKeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_Cambiar_ClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Cambiar_ClaveActionPerformed
         if (tbl_users.getSelectedRow() > -1) {
             uEdit = (Usuario) usuarios.get(tbl_users.getSelectedRow());
             this.operation = "edit";
@@ -721,18 +738,12 @@ public class UsuariosABM extends javax.swing.JFrame {
             dlg_change_password.setModal(true);
             clearPasswords();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_Cambiar_ClaveActionPerformed
 
     private void btn_save_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_save_passActionPerformed
         System.out.println("new pass: " + psw_new_pass.getText());
         System.out.println("repeat pass: " + psw_repeat_pass.getText());
-        if (psw_repeat_pass.getText().equals(psw_new_pass.getText()) && !psw_new_pass.getText().trim().equals("")) {
-            uEdit.setContrasenia(psw_new_pass.getText());
-            dlg_change_password.dispose();
-            saveData(uEdit);
-        } else {
-            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "ERROR!", JOptionPane.ERROR_MESSAGE);
-        }
+        forgotPassword();
     }//GEN-LAST:event_btn_save_passActionPerformed
 
     private void psw_repeat_passKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_psw_repeat_passKeyTyped
@@ -742,6 +753,16 @@ public class UsuariosABM extends javax.swing.JFrame {
     private void btn_cancel_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancel_passActionPerformed
         dlg_change_password.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_btn_cancel_passActionPerformed
+
+    private void btn_LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LimparActionPerformed
+
+        txt_search.setEnabled(true);
+        txt_search.setText("");
+        clearDetail();
+        cargarTabla(null);
+        this.operation = "Limpar";
+        alterView(); // TODO add your handling code here:
+    }//GEN-LAST:event_btn_LimparActionPerformed
 
     private void loadDetail() {
         person_select = uEdit.getPersona();
@@ -776,6 +797,19 @@ public class UsuariosABM extends javax.swing.JFrame {
         if (experto.persist(u, operation) == 1) {
             JOptionPane.showMessageDialog(this, "Datos guardados correctamente");
         }
+    }
+
+    public void forgotPassword() {
+        if (psw_repeat_pass.getText().equals("") && psw_new_pass.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Complete los campos requeridos", "ERROR!", JOptionPane.ERROR_MESSAGE);
+        } else if (psw_repeat_pass.getText().equals(psw_new_pass.getText()) && !psw_new_pass.getText().trim().equals("")) {
+            uEdit.setContrasenia(psw_new_pass.getText());
+            dlg_change_password.dispose();
+            saveData(uEdit);
+        } else {
+            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "ERROR!", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     /**
@@ -815,6 +849,8 @@ public class UsuariosABM extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Cambiar_Clave;
+    private javax.swing.JButton btn_Limpar;
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_cancel;
     private javax.swing.JButton btn_cancel_pass;
@@ -829,9 +865,9 @@ public class UsuariosABM extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbx_perfil;
     private javax.swing.JDialog dlg_change_password;
     private javax.swing.JDialog dlg_search_person;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
