@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista.cruds;
+package Vista.abms;
 
 import Expertos.Experto;
 import Expertos.ExpertoFactory;
@@ -135,7 +135,6 @@ public class UsuariosABM extends javax.swing.JFrame {
                 txt_username.setEnabled(true);
                 cbx_perfil.setEnabled(true);
                 btn_search_person.setEnabled(true);
-                btn_Cambiar_Clave.setEnabled(true);
 
                 btn_add.setEnabled(false);
                 btn_edit.setEnabled(false);
@@ -153,7 +152,6 @@ public class UsuariosABM extends javax.swing.JFrame {
                 txt_username.setEnabled(false);
                 cbx_perfil.setEnabled(false);
                 btn_search_person.setEnabled(false);
-                btn_Cambiar_Clave.setEnabled(false);
 
                 btn_add.setEnabled(true);
                 btn_edit.setEnabled(true);
@@ -217,8 +215,6 @@ public class UsuariosABM extends javax.swing.JFrame {
         cbx_perfil = new javax.swing.JComboBox<>();
         btn_search_person = new javax.swing.JButton();
         txt_username = new javax.swing.JTextField();
-        btn_Cambiar_Clave = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel de busqueda"));
 
@@ -534,7 +530,7 @@ public class UsuariosABM extends javax.swing.JFrame {
 
         jLabel4.setText("Perfil:");
 
-        jLabel5.setText("Usaurio:");
+        jLabel5.setText("Usuario");
 
         txt_name_person.setEditable(false);
 
@@ -547,15 +543,6 @@ public class UsuariosABM extends javax.swing.JFrame {
             }
         });
 
-        btn_Cambiar_Clave.setText("Cambiar Contraseña");
-        btn_Cambiar_Clave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_Cambiar_ClaveActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Contraseña:");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -564,10 +551,9 @@ public class UsuariosABM extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -576,14 +562,12 @@ public class UsuariosABM extends javax.swing.JFrame {
                                 .addComponent(txt_name_person, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_search_person)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_Cambiar_Clave)
-                            .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -605,10 +589,7 @@ public class UsuariosABM extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Cambiar_Clave)
-                    .addComponent(jLabel3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -628,8 +609,7 @@ public class UsuariosABM extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -647,18 +627,30 @@ public class UsuariosABM extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        this.operation = "edit";
-        alterView();
+        if (tbl_users.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un elemento de la tabla", "ERROR!", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            this.operation = "edit";
+            alterView();
+        }
+
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        uEdit = (Usuario) usuarios.get(tbl_users.getSelectedRow());
-        loadDetail();// TODO add your handling code here:
-        if (experto.delete(uEdit) == 1) {
-            JOptionPane.showMessageDialog(this, "Datos borrados correctamente");
+        if (tbl_users.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un elemento de la tabla", "ERROR!", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            uEdit = (Usuario) usuarios.get(tbl_users.getSelectedRow());
+
+            loadDetail();// TODO add your handling code here:
+            if (experto.delete(uEdit) == 1) {
+                JOptionPane.showMessageDialog(this, "Datos borrados correctamente");
+            }
+            clearDetail();
+            cargarTabla(null);
         }
-        clearDetail();
-        cargarTabla(null);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
@@ -727,19 +719,6 @@ public class UsuariosABM extends javax.swing.JFrame {
 
     }//GEN-LAST:event_psw_repeat_passKeyReleased
 
-    private void btn_Cambiar_ClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Cambiar_ClaveActionPerformed
-        if (tbl_users.getSelectedRow() > -1) {
-            uEdit = (Usuario) usuarios.get(tbl_users.getSelectedRow());
-            this.operation = "edit";
-
-            dlg_change_password.setSize(450, 275);
-            dlg_change_password.setVisible(true);
-            dlg_change_password.setLocationRelativeTo(this);
-            dlg_change_password.setModal(true);
-            clearPasswords();
-        }
-    }//GEN-LAST:event_btn_Cambiar_ClaveActionPerformed
-
     private void btn_save_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_save_passActionPerformed
         System.out.println("new pass: " + psw_new_pass.getText());
         System.out.println("repeat pass: " + psw_repeat_pass.getText());
@@ -788,7 +767,7 @@ public class UsuariosABM extends javax.swing.JFrame {
         if (!txt_username.getText().trim().equals("") && !txt_name_person.getText().trim().equals("")) {
             return true;
         } else {
-            JOptionPane.showMessageDialog(this, "El nombre no debe ser vacio", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Persona y Usuario no denben estar vacíos", "Error!", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
@@ -849,7 +828,6 @@ public class UsuariosABM extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Cambiar_Clave;
     private javax.swing.JButton btn_Limpar;
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_cancel;
@@ -867,7 +845,6 @@ public class UsuariosABM extends javax.swing.JFrame {
     private javax.swing.JDialog dlg_search_person;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

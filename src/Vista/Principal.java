@@ -5,8 +5,8 @@
  */
 package vista;
 
-import Vista.cruds.PuestosABM;
-import Vista.cruds.TarifaABM;
+import Vista.abms.PuestosABM;
+import Vista.abms.TarifaABM;
 import utils.UsuarioSingleton;
 
 /**
@@ -43,23 +43,16 @@ public class Principal extends javax.swing.JFrame {
         btnTipoVehiculo = new javax.swing.JButton();
         btnReportes = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        menu_settings = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 3, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 51, 0));
+        jLabel1.setFont(new java.awt.Font("Berlin Sans FB", 1, 40)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Playa de Estacionamiento");
+        jLabel1.setText("AparcAR");
+        jLabel1.setMaximumSize(new java.awt.Dimension(150, 41));
+        jLabel1.setMinimumSize(new java.awt.Dimension(150, 41));
+        jLabel1.setPreferredSize(new java.awt.Dimension(150, 41));
         getContentPane().add(jLabel1, java.awt.BorderLayout.CENTER);
 
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -165,75 +158,12 @@ public class Principal extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
-        menu_settings.setText("Configuracion");
-
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Perfiles");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        menu_settings.add(jMenuItem1);
-
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setText("Puestos");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        menu_settings.add(jMenuItem2);
-
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem3.setText("Tipo de Vehiculos");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        menu_settings.add(jMenuItem3);
-
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem4.setText("Usuarios");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        menu_settings.add(jMenuItem4);
-
-        jMenuBar1.add(menu_settings);
-
-        jMenu1.setText("Sistema");
-
-        jMenuItem5.setText("Cambiar Clave");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem5);
-        jMenu1.add(jSeparator1);
-
-        jMenuItem6.setText("Salir");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem6);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        new IngresoView().setVisible(true);
+        new Ingresos().setVisible(true);
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
@@ -242,7 +172,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btn_personasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_personasActionPerformed
 
-        new Vista.cruds.PersonasABM().setVisible(true);
+        new Vista.abms.PersonasABM().setVisible(true);
     }//GEN-LAST:event_btn_personasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
@@ -250,47 +180,23 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-        new Vista.cruds.UsuariosABM().setVisible(true);
+        new Vista.abms.UsuariosABM().setVisible(true);
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnTarifasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarifasActionPerformed
-        new Vista.cruds.TarifaABM().setVisible(true);
+        new Vista.abms.TarifaABM().setVisible(true);
     }//GEN-LAST:event_btnTarifasActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new Vista.cruds.PerfilesABM().setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        new Vista.cruds.PuestosABM().setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        new Vista.cruds.TipoVehiculoABM().setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        new Vista.cruds.UsuariosABM().setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        System.exit(EXIT_ON_CLOSE);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
     private void btnPerfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilesActionPerformed
-        new Vista.cruds.PerfilesABM().setVisible(true);// TODO add your handling code here:
+        new Vista.abms.PerfilesABM().setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_btnPerfilesActionPerformed
 
     private void btnPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuestosActionPerformed
-        new Vista.cruds.PuestosABM().setVisible(true);        // TODO add your handling code here:
+        new Vista.abms.PuestosABM().setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnPuestosActionPerformed
 
     private void btnTipoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTipoVehiculoActionPerformed
-        new Vista.cruds.TipoVehiculoABM().setVisible(true);        // TODO add your handling code here:
+        new Vista.abms.TipoVehiculoABM().setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnTipoVehiculoActionPerformed
 
     /**
@@ -339,17 +245,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btn_personas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JMenu menu_settings;
     // End of variables declaration//GEN-END:variables
 
     private void permisos() {
@@ -357,19 +253,17 @@ public class Principal extends javax.swing.JFrame {
         switch (UsuarioSingleton.getInstance().getUsuario().getPerfil().getNombrePerfil()) {
             case "admin":
 
-                btnIngresar.setEnabled(true);
+                btnIngresar.setEnabled(false);
+                btnIngresar.setVisible(false);
                 btnReportes.setEnabled(true);
                 btnTarifas.setEnabled(true);
                 btnUsuarios.setEnabled(true);
                 btn_personas.setEnabled(true);
                 btnPuestos.setEnabled(true);
                 btnTipoVehiculo.setEnabled(true);
-                btnPerfiles.setEnabled(true);
-                jMenuItem1.setEnabled(true);
-                jMenuItem2.setEnabled(true);
-                jMenuItem3.setEnabled(true);
-                jMenuItem4.setEnabled(true);
-
+                btnPerfiles.setEnabled(false);
+                btnPerfiles.setVisible(false);
+             
                 break;
             case "contador":
                 btnIngresar.setEnabled(false);
@@ -387,19 +281,11 @@ public class Principal extends javax.swing.JFrame {
                 btnPuestos.setVisible(false);
                 btnTipoVehiculo.setVisible(false);
                 btnPerfiles.setVisible(false);
-                jMenuItem1.setVisible(false);
-                jMenuItem1.setVisible(false);
-                jMenuItem2.setEnabled(false);
-                jMenuItem2.setVisible(false);
-                jMenuItem3.setEnabled(false);
-                jMenuItem3.setVisible(false);
-                jMenuItem4.setEnabled(false);
-                jMenuItem4.setVisible(false);
+             
                 break;
-            case "operario":
+            case "empleado":
                 btnIngresar.setEnabled(true);
-                btnReportes.setEnabled(true);
-                btnPuestos.setEnabled(true);
+                btnReportes.setEnabled(false);
                 btnReportes.setVisible(false);
                 btnTarifas.setEnabled(false);
                 btnTarifas.setVisible(false);
@@ -413,11 +299,22 @@ public class Principal extends javax.swing.JFrame {
                 btnPuestos.setVisible(false);
                 btnTipoVehiculo.setVisible(false);
                 btnPerfiles.setVisible(false);
-                jMenuItem1.setEnabled(false);
-                jMenuItem2.setEnabled(false);
-                jMenuItem3.setEnabled(false);
-                jMenuItem4.setEnabled(false);
+               
                 break;
+            case "encargado":
+                btnIngresar.setEnabled(true);
+                btnReportes.setEnabled(true);
+                btnTarifas.setEnabled(true);
+                btnUsuarios.setEnabled(true);
+                btn_personas.setEnabled(true);
+                btnPuestos.setEnabled(false);
+                btnTipoVehiculo.setEnabled(false);
+                btnPerfiles.setEnabled(false);
+                btnPuestos.setVisible(false);
+                btnTipoVehiculo.setVisible(false);
+                btnPerfiles.setVisible(false);
+             
+
         }
         btnCerrarSesion.setEnabled(true);
 

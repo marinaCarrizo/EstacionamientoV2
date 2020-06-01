@@ -58,9 +58,6 @@ public class Login extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
         btnOlvideContraseña = new javax.swing.JButton();
 
-        dlg_forgot_password.setMaximumSize(new java.awt.Dimension(400, 163));
-        dlg_forgot_password.setPreferredSize(new java.awt.Dimension(400, 163));
-
         jPanel2.setToolTipText("");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Cambiar Clave"));
@@ -69,7 +66,7 @@ public class Login extends javax.swing.JFrame {
 
         psw_new_pass.setText("jPasswordField2");
 
-        jLabel7.setText("Confirmar:");
+        jLabel7.setText("Confirmar clave:");
 
         psw_repeat_pass.setText("jPasswordField3");
         psw_repeat_pass.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -111,7 +108,7 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(psw_repeat_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                            .addComponent(psw_repeat_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                             .addComponent(psw_new_pass)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -181,11 +178,18 @@ public class Login extends javax.swing.JFrame {
         jPanel2.getAccessibleContext().setAccessibleName("Cambiar contraseña");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingreso de Personal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 24))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "AparcAR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Berlin Sans FB", 1, 29), new java.awt.Color(0, 51, 153))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setText("Usuario");
+
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Contraseña");
@@ -215,28 +219,26 @@ public class Login extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(72, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(147, 147, 147))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(134, 134, 134))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnIngresar)
-                        .addGap(135, 135, 135))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 69, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnOlvideContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75))
+                        .addGap(129, 129, 129))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(76, 76, 76))))
+                            .addComponent(btnOlvideContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(55, 55, 55))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(jLabel2)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnIngresar)
+                .addGap(118, 118, 118))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,10 +251,11 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnOlvideContraseña))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnOlvideContraseña)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -268,8 +271,7 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -315,30 +317,38 @@ public class Login extends javax.swing.JFrame {
         System.out.println("repeat pass: " + psw_repeat_pass.getText());
         forgotPassword();
     }//GEN-LAST:event_btn_save_passActionPerformed
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
     private void loguear() {
         if (txtUsuario.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Ingrese usuario y contraseña", "ERROR!", JOptionPane.ERROR_MESSAGE);
         } else {
-            try{
-            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            String user = txtUsuario.getText();
-            String pass = txtContrasenia.getText();
+            try {
+                this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+                String user = txtUsuario.getText();
+                String pass = txtContrasenia.getText();
 
-            Usuario u = (Usuario) ue.find(user);
+                Usuario u = (Usuario) ue.find(user);
 
-            Experto ep = new ExpertoFactory().getExperto("Persona");
+                Experto ep = new ExpertoFactory().getExperto("Persona");
 
-            if (u != null && u.getContrasenia().equals(pass)) {
-                u.setPersona((Persona) ep.search(String.valueOf(u.getIdPersona())).get(0));
-                this.dispose();
-                UsuarioSingleton.getInstance().setUsuario(u);
-                new Principal().setVisible(true);
-            }  else {
+                if (u != null && u.getContrasenia().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Cree una contraseña presionando en el botón 'Olvide mi contraseña'", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    if (u != null && u.getContrasenia().equals(pass)) {
+                        u.setPersona((Persona) ep.find(String.valueOf(u.getIdPersona())));
+                        this.dispose();
+                        UsuarioSingleton.getInstance().setUsuario(u);
+                        new Principal().setVisible(true);
+                    } else {
 
-                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "ERROR!", JOptionPane.ERROR_MESSAGE);
-                txtContrasenia.setText("");
-            }
-            }catch(IndexOutOfBoundsException e) {
+                        JOptionPane.showMessageDialog(this, "Contraseña incorrecta.", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                        txtContrasenia.setText("");
+                    }
+                }
+            } catch (IndexOutOfBoundsException e) {
                 JOptionPane.showMessageDialog(this, "Usuario inexistente.", "ERROR!", JOptionPane.ERROR_MESSAGE);
                 txtContrasenia.setText("");
                 txtUsuario.setText("");
@@ -349,16 +359,21 @@ public class Login extends javax.swing.JFrame {
     }
 
     public void forgotPassword() {
-        if(psw_repeat_pass.getText().equals("")&&psw_new_pass.getText().equals("")){
+        if (psw_repeat_pass.getText().equals("") && psw_new_pass.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Complete los campos requeridos", "ERROR!", JOptionPane.ERROR_MESSAGE);
-        }else if (psw_repeat_pass.getText().equals(psw_new_pass.getText()) && !psw_new_pass.getText().trim().equals("")) {
-            uEdit.setContrasenia(psw_new_pass.getText());
-            dlg_forgot_password.dispose();
-            saveData(uEdit);
         } else {
-            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "ERROR!", JOptionPane.ERROR_MESSAGE);
-        }
 
+            if (psw_repeat_pass.getText().equals(psw_new_pass.getText())) {
+                uEdit.setContrasenia(psw_new_pass.getText());
+                dlg_forgot_password.dispose();
+                saveData(uEdit);
+            } else {
+                if (!psw_repeat_pass.getText().equals(psw_new_pass.getText())) {
+                    JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        }
     }
 
     private void saveData(Usuario u) {
@@ -386,16 +401,24 @@ public class Login extends javax.swing.JFrame {
                 if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

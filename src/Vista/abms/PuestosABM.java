@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista.cruds;
+package Vista.abms;
 
 import Expertos.Experto;
 import Expertos.ExpertoFactory;
-import Expertos.ExpertoPerfil;
-import Modelo.Perfil;
+import Expertos.ExpertoPuesto;
+import Modelo.Puesto;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -20,24 +20,24 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author MARINA
  */
-public class PerfilesABM extends javax.swing.JFrame {
+public class PuestosABM extends javax.swing.JFrame {
 
     /**
      * Creates new form Puestos
      */
     private Experto experto;
     private String operation = "";
-    private List<Object> perfiles;
-    private Perfil pEdit;
+    private List<Object> puestos;
+    private Puesto pEdit;
 
-    public PerfilesABM() {
+    public PuestosABM() {
 
         initComponents();
 
         this.setLocationRelativeTo(this);
 
         ExpertoFactory expertoFactory = new ExpertoFactory();
-        experto = expertoFactory.getExperto("Perfil");
+        experto = expertoFactory.getExperto("Puesto");
 
         cargarTabla(null);
         alterView();
@@ -46,9 +46,10 @@ public class PerfilesABM extends javax.swing.JFrame {
     private void cargarTabla(String param) {
 
         Vector<String> tableHeaders = new Vector<String>();
-        tableHeaders.add("Perfil");
-        this.perfiles = experto.search(param);
-        jTable1.setModel(new DefaultTableModel(this.displayResult(this.perfiles), tableHeaders) {
+        tableHeaders.add("Puesto");
+        tableHeaders.add("Estado");
+        this.puestos = experto.search(param);
+        jTable1.setModel(new DefaultTableModel(this.displayResult(this.puestos), tableHeaders) {
             public Class<?> getColumnClass(int column) {
                 if (column == 1) {
                     return Boolean.class;
@@ -63,9 +64,10 @@ public class PerfilesABM extends javax.swing.JFrame {
         Vector tableData = new Vector();
 
         for (Object o : resultList) {
-            Perfil perfil = (Perfil) o;
+            Puesto puesto = (Puesto) o;
             Vector<Object> oneRow = new Vector<Object>();
-            oneRow.add(perfil.getNombrePerfil());
+            oneRow.add(puesto.getNumPuesto());
+            oneRow.add(puesto.isEstadoPuesto());
             tableData.add(oneRow);
         }
         return tableData;
@@ -79,7 +81,6 @@ public class PerfilesABM extends javax.swing.JFrame {
                 btn_cancel.setEnabled(true);
                 txt_detalle.setEnabled(true);
                 btn_add.setEnabled(false);
-                btn_edit.setEnabled(false);
                 btn_delete.setEnabled(false);
                 txt_search.setEnabled(false);
                 btn_search.setEnabled(false);
@@ -87,13 +88,11 @@ public class PerfilesABM extends javax.swing.JFrame {
                 break;
             case "save":
             case "cancel":
-            case "Limpiar":
             default:
                 btn_save.setEnabled(false);
                 btn_cancel.setEnabled(false);
                 txt_detalle.setEnabled(false);
                 btn_add.setEnabled(true);
-                btn_edit.setEnabled(true);
                 btn_delete.setEnabled(true);
                 txt_search.setEnabled(true);
                 btn_search.setEnabled(true);
@@ -111,7 +110,6 @@ public class PerfilesABM extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -119,9 +117,7 @@ public class PerfilesABM extends javax.swing.JFrame {
         txt_search = new javax.swing.JTextField();
         btn_search = new javax.swing.JButton();
         btn_add = new javax.swing.JButton();
-        btn_edit = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
-        btn_Limpar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_detalle = new javax.swing.JTextField();
@@ -132,7 +128,7 @@ public class PerfilesABM extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Perfiles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 24))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Puestos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 24))); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,24 +170,10 @@ public class PerfilesABM extends javax.swing.JFrame {
             }
         });
 
-        btn_edit.setText("Editar");
-        btn_edit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editActionPerformed(evt);
-            }
-        });
-
         btn_delete.setText("Eliminar");
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_deleteActionPerformed(evt);
-            }
-        });
-
-        btn_Limpar.setText("Limpiar");
-        btn_Limpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_LimparActionPerformed(evt);
             }
         });
 
@@ -202,22 +184,18 @@ public class PerfilesABM extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_add)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_edit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_delete)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(29, 29, 29)
-                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_search)
+                        .addGap(133, 133, 133)
+                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Limpar)))
+                        .addComponent(btn_search))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_add)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_delete)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -226,13 +204,11 @@ public class PerfilesABM extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_search)
-                    .addComponent(btn_Limpar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btn_search))
+                .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_edit)
                     .addComponent(btn_add)
                     .addComponent(btn_delete))
                 .addGap(0, 11, Short.MAX_VALUE))
@@ -240,7 +216,7 @@ public class PerfilesABM extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle"));
 
-        jLabel2.setText("Detalle:");
+        jLabel2.setText("Numero de puesto:");
 
         btn_save.setText("Guardar");
         btn_save.addActionListener(new java.awt.event.ActionListener() {
@@ -326,7 +302,6 @@ public class PerfilesABM extends javax.swing.JFrame {
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         cargarTabla(txt_search.getText().trim());
-        txt_search.setEnabled(false);
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
@@ -335,29 +310,35 @@ public class PerfilesABM extends javax.swing.JFrame {
         clearDetail();
     }//GEN-LAST:event_btn_addActionPerformed
 
-    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        this.operation = "edit";
-        alterView();
-    }//GEN-LAST:event_btn_editActionPerformed
-
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        pEdit = (Perfil) perfiles.get(jTable1.getSelectedRow());
-        loadDetail();// TODO add your handling code here:
-        if (experto.delete(pEdit) == 1) {
-            JOptionPane.showMessageDialog(this, "Datos borrados correctamente");
+        if (jTable1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un elemento de la tabla", "ERROR!", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+
+            pEdit = (Puesto) puestos.get(jTable1.getSelectedRow());
+
+            loadDetail();// TODO add your handling code here:
+            if (experto.delete(pEdit) == 1) {
+                JOptionPane.showMessageDialog(this, "Datos borrados correctamente");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Elemento en uso. No es posible eliminarlo", "ERROR!", JOptionPane.ERROR_MESSAGE);
+            }
+            clearDetail();
+            cargarTabla(null);
+
         }
-        clearDetail();
-        cargarTabla(null);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
 
         if (validForm()) {
             if (this.operation == "add") {
-                Perfil newP = new Perfil(txt_detalle.getText().trim());
+                Puesto newP = new Puesto(txt_detalle.getText().trim(), false);
                 saveData(newP);
             } else {
-                pEdit.setNombrePerfil(txt_detalle.getText());
+                pEdit.setNumPuesto(txt_detalle.getText());
                 saveData(pEdit);
             }
         }
@@ -376,28 +357,19 @@ public class PerfilesABM extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelActionPerformed
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
-        pEdit = (Perfil) perfiles.get(jTable1.getSelectedRow());
+        pEdit = (Puesto) puestos.get(jTable1.getSelectedRow());
         loadDetail();
 
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
-        pEdit = (Perfil) perfiles.get(jTable1.getSelectedRow());
+        pEdit = (Puesto) puestos.get(jTable1.getSelectedRow());
         loadDetail();// TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseReleased
 
-    private void btn_LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LimparActionPerformed
-        txt_search.setEnabled(true);
-        txt_search.setText("");
-        clearDetail();
-        cargarTabla(null);
-        this.operation = "Limpar";
-        alterView();        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_LimparActionPerformed
-
     private void loadDetail() {
-        txt_codigo.setText(pEdit.getIdPerfil() + "");
-        txt_detalle.setText(pEdit.getNombrePerfil());
+        txt_codigo.setText(pEdit.getIdPuesto() + "");
+        txt_detalle.setText(pEdit.getNumPuesto());
     }
 
     private void clearDetail() {
@@ -409,19 +381,19 @@ public class PerfilesABM extends javax.swing.JFrame {
         if (!txt_detalle.getText().trim().equals("")) {
             return true;
         } else {
-            JOptionPane.showMessageDialog(this, "El detalle no debe ser vacio", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El numero de puesto no debe estar vacio", "Error!", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
 
-    private void saveData(Perfil p) {
+    private void saveData(Puesto p) {
         if (experto.persist(p) == 1) {
             JOptionPane.showMessageDialog(this, "Datos guardados correctamente");
         }
     }
 
     /**
-     * @param args the command line arguments //
+     * @param args the command line arguments
      */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
@@ -437,33 +409,31 @@ public class PerfilesABM extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(PerfilesABM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(PuestosABM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(PerfilesABM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(PuestosABM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(PerfilesABM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(PuestosABM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(PerfilesABM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(PuestosABM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
+//        //</editor-fold>
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new PerfilesABM().setVisible(true);
+//                new PuestosABM().setVisible(true);
 //            }
 //        });
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Limpar;
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_cancel;
     private javax.swing.JButton btn_delete;
-    private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_save;
     private javax.swing.JButton btn_search;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

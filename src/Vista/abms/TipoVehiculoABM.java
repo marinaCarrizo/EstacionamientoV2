@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista.cruds;
+package Vista.abms;
 
 import Expertos.Experto;
 import Expertos.ExpertoFactory;
@@ -124,7 +124,7 @@ public class TipoVehiculoABM extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo de Vehiculos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 24))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipos de Vehiculos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 24))); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -232,7 +232,7 @@ public class TipoVehiculoABM extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle"));
 
-        jLabel2.setText("Detalle:");
+        jLabel2.setText("Tipo Vehiculo:");
 
         btn_save.setText("Guardar");
         btn_save.addActionListener(new java.awt.event.ActionListener() {
@@ -263,14 +263,12 @@ public class TipoVehiculoABM extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_save))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txt_detalle, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_cancel)))
+                    .addComponent(txt_detalle, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -322,24 +320,42 @@ public class TipoVehiculoABM extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+
         this.operation = "add";
         alterView();
         clearDetail();
+
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        this.operation = "edit";
-        alterView();
+
+        if (jTable1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un elemento de la tabla", "ERROR!", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            this.operation = "edit";
+
+            alterView();
+        }
+
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        tvEdit = (Tipovehiculo) listaTV.get(jTable1.getSelectedRow());
-        loadDetail();// TODO add your handling code here:
-        if (experto.delete(tvEdit) == 1) {
-            JOptionPane.showMessageDialog(this, "Datos borrados correctamente");
+        if (jTable1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un elemento de la tabla", "ERROR!", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            tvEdit = (Tipovehiculo) listaTV.get(jTable1.getSelectedRow());
+
+            loadDetail();// TODO add your handling code here:
+            if (experto.delete(tvEdit) == 1) {
+                JOptionPane.showMessageDialog(this, "Datos borrados correctamente");
+            }else {
+                JOptionPane.showMessageDialog(this, "No puede eliminar este ítem ya que esta siendo utilizado en el historial de ingresos","ERROR!", JOptionPane.ERROR_MESSAGE);
+            }
+            clearDetail();
+            cargarTabla(null);
         }
-        clearDetail();
-        cargarTabla(null);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
@@ -401,7 +417,7 @@ public class TipoVehiculoABM extends javax.swing.JFrame {
         if (!txt_detalle.getText().trim().equals("")) {
             return true;
         } else {
-            JOptionPane.showMessageDialog(this, "El detalle no debe ser vacio", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, " Tipo vehiculo no debe estar vacio", "Error!", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }

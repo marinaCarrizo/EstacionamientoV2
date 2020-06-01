@@ -22,7 +22,7 @@ public class ExpertoFactory {
             case "TipoVehiculo":
                 return new ExpertoTipoVehiculo();
             case "Turno":
-                return new ExpertoTurno();
+                return new ExpertoTarifa();
             case "Usuario":
                 return new ExpertoUsuario();
             case "Estacionamiento":

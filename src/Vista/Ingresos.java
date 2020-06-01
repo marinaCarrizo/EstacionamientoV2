@@ -12,7 +12,7 @@ import Expertos.ExpertoPuesto;
 import Modelo.Estacionamiento;
 import Modelo.Tipovehiculo;
 import Modelo.Puesto;
-import Modelo.Turno;
+import Modelo.Tarifa;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalTime;
@@ -40,7 +40,7 @@ import utils.UsuarioSingleton;
  *
  * @author MARINA
  */
-public class IngresoView extends javax.swing.JFrame {
+public class Ingresos extends javax.swing.JFrame {
 
     private Experto experto;
     private ExpertoFactory factory;
@@ -53,7 +53,7 @@ public class IngresoView extends javax.swing.JFrame {
     /**
      * Creates new form Ingreso
      */
-    public IngresoView() {
+    public Ingresos() {
 
         lista_tVehiulos = new ArrayList<Tipovehiculo>();
         lista_puestos = new ArrayList<Puesto>();
@@ -497,43 +497,35 @@ public class IngresoView extends javax.swing.JFrame {
 
         } else {
 
-            Experto et = new ExpertoFactory().getExperto("Turno");
-            List<Object> turnos_list = et.search(null);
-            Timestamp fecha_ingreso = new Timestamp(Calendar.getInstance().getTimeInMillis());
-            boolean open_service = false;
+            try {
+                Timestamp fecha_ingreso = new Timestamp(Calendar.getInstance().getTimeInMillis());
 
-            Calendar c = Calendar.getInstance();
-            Time hora = Time.valueOf(LocalTime.now());
-            for (Object o : turnos_list) {
-                Turno t = (Turno) o;
-                if (t.getInicio().getTime() < hora.getTime()) {
-                    open_service = true;
-                    break;
+                Estacionamiento e = new Estacionamiento();
+                e.setPatente(txt_patente.getText().toUpperCase());
+                e.setPropietario(txt_propietario.getText().toUpperCase());
+                e.setPuesto(lista_puestos.get(cbx_puestos.getSelectedIndex()));
+                e.setTipovehiculo(lista_tVehiulos.get(cbx_tipovehiculos.getSelectedIndex()));
+                e.setPersona(UsuarioSingleton.getInstance().getUsuario().getPersona());
+                e.setFechaIngreso(fecha_ingreso);
+
+                if (experto.persist(e, Experto.ADD) > 0) {
+                    JOptionPane.showMessageDialog(this, "Ingreso registrado!", "Info", JOptionPane.INFORMATION_MESSAGE);
                 }
-            }
-            if (open_service) {
-                try {
-                    Estacionamiento e = new Estacionamiento();
-                    e.setPatente(txt_patente.getText().toUpperCase());
-                    e.setPropietario(txt_propietario.getText().toUpperCase());
-                    e.setPuesto(lista_puestos.get(cbx_puestos.getSelectedIndex()));
-                    e.setTipovehiculo(lista_tVehiulos.get(cbx_tipovehiculos.getSelectedIndex()));
-                    e.setPersona(UsuarioSingleton.getInstance().getUsuario().getPersona());
-                    e.setFechaIngreso(fecha_ingreso);
+                loadComboPuestos();
+                cargarTabla(null);
+                clearForm();
+            } catch (Exception e) {
+                if (cbx_puestos.getSelectedIndex() <= 0) {
+                    JOptionPane.showMessageDialog(this, "No quedan mas puestos disponibles", "Error", JOptionPane.ERROR_MESSAGE);
 
-                    if (experto.persist(e, Experto.ADD) > 0) {
-                        JOptionPane.showMessageDialog(this, "Ingreso registrado!", "Info", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    loadComboPuestos();
-                    cargarTabla(null);
-                    clearForm();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Error al guardar el registro:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al guardar el registro:\n", "Error", JOptionPane.ERROR_MESSAGE);
                     e.printStackTrace();
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al guardar el registro:\nLa hora de ingreso no coincide con los turnos disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
             }
+            /*} else {
+                JOptionPane.showMessageDialog(this, "Error al guardar el registro:\nLa hora de ingreso no coincide con los turnos disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
+            }*/
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -597,7 +589,7 @@ public class IngresoView extends javax.swing.JFrame {
 
     private void registrarSalida() {
         if (tabla_ingresos.getSelectedRow() == -1 || ((Estacionamiento) ingresos.get(tabla_ingresos.getSelectedRow())).getFechaSalida() != null) {
-            JOptionPane.showMessageDialog(this, "Seleccione un vehiculo", "ERROR!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Seleccione un vehiculo sin fecha de salida", "ERROR!", JOptionPane.ERROR_MESSAGE);
             //return;
         } else {
             Estacionamiento e = (Estacionamiento) ingresos.get(tabla_ingresos.getSelectedRow());
@@ -638,16 +630,12 @@ public class IngresoView extends javax.swing.JFrame {
         Time hora_salida = Time.valueOf(FunctionsTools.formatearHora(e.getFechaSalida().getTime()));
 
         for (int i = 0; i < turnos_list.size(); i++) {
-            Turno t = (Turno) turnos_list.get(i);
-            //Turno t_next = null;
-            //if (i < turnos_list.size() - 1) {
-              //  t_next = (Turno) turnos_list.get(i + 1);
-           // }
+            Tarifa t = (Tarifa) turnos_list.get(i);
             if (t.getTipovehiculo().getIdTipoVehiculo() == e.getTipovehiculo().getIdTipoVehiculo()
                     && t.getInicio().getTime() <= hora_entrada.getTime()
                     && t.getFin().getTime() >= hora_salida.getTime()) {
                 //entonces cobramos en torno a la tarifa del horario al que ingreso
-                costo_turno = t.getPrecio();
+                costo_turno = t.getPrecioHora();
                 break;
             }
         }
@@ -776,21 +764,23 @@ public class IngresoView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IngresoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ingresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IngresoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ingresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IngresoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ingresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IngresoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ingresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IngresoView().setVisible(true);
+                new Ingresos().setVisible(true);
             }
         });
     }

@@ -13,6 +13,8 @@ import Modelo.Estacionamiento;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +44,7 @@ public class Reporte extends javax.swing.JFrame {
     private ExpertoEstacionamiento experto;
 
     List<Object> ingresos;
-    
+
     public Reporte() {
         experto = new ExpertoEstacionamiento();
         initComponents();
@@ -173,18 +175,22 @@ public class Reporte extends javax.swing.JFrame {
         if (!txtDesde.getText().trim().equals("") && !txtHasta.getText().trim().equals("")) {
             try {
                 String pattern = "dd/MM/yyyy";
+                Date fechaActual= new Date(System.currentTimeMillis());
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
                 Timestamp desde = new Timestamp(simpleDateFormat.parse(txtDesde.getText()).getTime());
                 Timestamp hasta = new Timestamp(simpleDateFormat.parse(txtHasta.getText()).getTime());
-                
-                gemerarReporte(desde,hasta);
-                
+                if (desde.after(hasta) || hasta.after(fechaActual)|| desde.after(fechaActual)){
+                    JOptionPane.showMessageDialog(this, "Ingrese fechas válidas", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }else{
+                gemerarReporte(desde, hasta);
+                }
+
             } catch (ParseException ex) {
                 Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Todos los campos deben estar completos");
+        } else {
+            JOptionPane.showMessageDialog(this, "Todos los campos deben estar completos","ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
@@ -236,14 +242,14 @@ public class Reporte extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void gemerarReporte(Timestamp desde, Timestamp hasta) {
-        List<Estacionamiento> lista = experto.searchDesdeHasta(desde,hasta);
+        List<Estacionamiento> lista = experto.searchDesdeHasta(desde, hasta);
         double total = 0;
         for (Estacionamiento e : lista) {
-            if(e.getImporte() != null){
+            if (e.getImporte() != null) {
                 total += e.getImporte();
             }
         }
-        
+
         try {
             Map map = new HashMap();
             JasperPrint print;

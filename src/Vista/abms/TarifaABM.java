@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista.cruds;
+package Vista.abms;
 
 import Expertos.Experto;
 import Expertos.ExpertoFactory;
 import Expertos.ExpertoPerfil;
 import Expertos.ExpertoPersona;
 import Expertos.ExpertoTipoVehiculo;
-import Expertos.ExpertoTurno;
+import Expertos.ExpertoTarifa;
 import Modelo.Perfil;
 import Modelo.Usuario;
 import Modelo.Persona;
 import Modelo.Tipovehiculo;
-import Modelo.Turno;
+import Modelo.Tarifa;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public class TarifaABM extends javax.swing.JFrame {
     private Experto experto;
     private String operation = "";
     private List<Object> turnos;
-    private Turno tEdit;
+    private Tarifa tEdit;
 
     private List<Tipovehiculo> lista_tipoVehiculo;
 
@@ -91,12 +91,12 @@ public class TarifaABM extends javax.swing.JFrame {
         Vector tableData = new Vector();
 
         for (Object o : resultList) {
-            Turno turno = (Turno) o;
+            Tarifa turno = (Tarifa) o;
             Vector<Object> oneRow = new Vector<Object>();
-            oneRow.add(turno.getIdTurno());
-            oneRow.add(turno.getNombreTurno());
+            oneRow.add(turno.getIdTarifa());
+            oneRow.add(turno.getNombreTarifa());
             oneRow.add(turno.getTipovehiculo().getTipoVehiculo());
-            oneRow.add("$" + String.format("%.0f", turno.getPrecio()));
+            oneRow.add("$" + String.format("%.0f", turno.getPrecioHora()));
             tableData.add(oneRow);
         }
         return tableData;
@@ -304,7 +304,7 @@ public class TarifaABM extends javax.swing.JFrame {
 
         jLabel4.setText("Tipo de Vehiculo:");
 
-        jLabel5.setText("Detalle:");
+        jLabel5.setText("Nombre Tarifa");
 
         cbx_tipovehi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -429,8 +429,6 @@ public class TarifaABM extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("Tarifas");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -440,24 +438,38 @@ public class TarifaABM extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+
         this.operation = "add";
         alterView();
         clearDetail();
+
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        this.operation = "edit";
-        alterView();
+        if (tbl_turnos.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un elemento de la tabla", "ERROR!", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            this.operation = "edit";
+            alterView();
+        }
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        tEdit = (Turno) turnos.get(tbl_turnos.getSelectedRow());
-        loadDetail();// TODO add your handling code here:
-        if (experto.delete(tEdit) == 1) {
-            JOptionPane.showMessageDialog(this, "Datos borrados correctamente");
+        if (tbl_turnos.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un elemento de la tabla", "ERROR!", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            tEdit = (Tarifa) turnos.get(tbl_turnos.getSelectedRow());
+            loadDetail();// TODO add your handling code here:
+            if (experto.delete(tEdit) == 1) {
+                JOptionPane.showMessageDialog(this, "Datos borrados correctamente");
+            }else {
+                JOptionPane.showMessageDialog(this, "No puede eliminar este ítem ya que esta siendo utilizado en el historial de ingresos","ERROR!", JOptionPane.ERROR_MESSAGE);
+            }
+            clearDetail();
+            cargarTabla(null);
         }
-        clearDetail();
-        cargarTabla(null);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
@@ -465,9 +477,9 @@ public class TarifaABM extends javax.swing.JFrame {
         if (validForm()) {
             if (this.operation == Experto.ADD) {
                 try {
-                    Turno newTurno = new Turno();
-                    newTurno.setNombreTurno(txt_detalle.getText());
-                    newTurno.setPrecio(Float.parseFloat(txt_precio.getText()));
+                    Tarifa newTurno = new Tarifa();
+                    newTurno.setNombreTarifa(txt_detalle.getText());
+                    newTurno.setPrecioHora(Float.parseFloat(txt_precio.getText()));
                     newTurno.setInicio(Time.valueOf(txt_inicio.getText()));
                     newTurno.setFin(Time.valueOf(txt_fin.getText()));
                     newTurno.setTipovehiculo(lista_tipoVehiculo.get(cbx_tipovehi.getSelectedIndex()));
@@ -478,8 +490,8 @@ public class TarifaABM extends javax.swing.JFrame {
                 }
             } else {
                 try {
-                    tEdit.setNombreTurno(txt_detalle.getText().trim());
-                    tEdit.setPrecio(Float.parseFloat(txt_precio.getText()));
+                    tEdit.setNombreTarifa(txt_detalle.getText().trim());
+                    tEdit.setPrecioHora(Float.parseFloat(txt_precio.getText()));
                     tEdit.setInicio(Time.valueOf(txt_inicio.getText()));
                     tEdit.setFin(Time.valueOf(txt_fin.getText()));
                     tEdit.setTipovehiculo(lista_tipoVehiculo.get(cbx_tipovehi.getSelectedIndex()));
@@ -505,13 +517,13 @@ public class TarifaABM extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelActionPerformed
 
     private void tbl_turnosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_turnosKeyReleased
-        tEdit = (Turno) turnos.get(tbl_turnos.getSelectedRow());
+        tEdit = (Tarifa) turnos.get(tbl_turnos.getSelectedRow());
         loadDetail();
 
     }//GEN-LAST:event_tbl_turnosKeyReleased
 
     private void tbl_turnosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_turnosMouseReleased
-        tEdit = (Turno) turnos.get(tbl_turnos.getSelectedRow());
+        tEdit = (Tarifa) turnos.get(tbl_turnos.getSelectedRow());
         loadDetail();// TODO add your handling code here:
     }//GEN-LAST:event_tbl_turnosMouseReleased
 
@@ -536,8 +548,8 @@ public class TarifaABM extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_precioActionPerformed
 
     private void loadDetail() {
-        txt_detalle.setText(tEdit.getNombreTurno());
-        txt_precio.setText("" + tEdit.getPrecio());
+        txt_detalle.setText(tEdit.getNombreTarifa());
+        txt_precio.setText("" + tEdit.getPrecioHora());
         txt_inicio.setText(FunctionsTools.formatearHora(tEdit.getInicio().getTime()));
         txt_fin.setText(FunctionsTools.formatearHora(tEdit.getFin().getTime()));
         cbx_tipovehi.setSelectedItem(tEdit.getTipovehiculo().getTipoVehiculo());
@@ -552,15 +564,16 @@ public class TarifaABM extends javax.swing.JFrame {
     }
 
     private boolean validForm() {
-        if (!txt_detalle.getText().trim().equals("") && !txt_precio.getText().trim().equals("")) {
+        if (!txt_detalle.getText().trim().equals("") && !txt_precio.getText().trim().equals("")
+                && !txt_inicio.getText().trim().equals("") && !txt_fin.getText().trim().equals("")) {
             return true;
         } else {
-            JOptionPane.showMessageDialog(this, "El campo no debe ser vacio", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Los campos no deben estar vacios", "Error!", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
 
-    private void saveData(Turno tv) {
+    private void saveData(Tarifa tv) {
         if (experto.persist(tv, operation) == 1) {
             JOptionPane.showMessageDialog(this, "Datos guardados correctamente");
         }

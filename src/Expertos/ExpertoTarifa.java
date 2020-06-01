@@ -6,7 +6,7 @@
 package Expertos;
 
 import BDEstacionamientoV2.HibernateUtil;
-import Modelo.Turno;
+import Modelo.Tarifa;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -16,15 +16,15 @@ import org.hibernate.Session;
  *
  * @author MARINA
  */
-public class ExpertoTurno implements Experto{
+public class ExpertoTarifa implements Experto{
     
 
     
     @Override
     public List<Object> search(String param) {
-        String hql = "from Turno t join fetch t.tipovehiculo ORDER BY t.idTurno DESC";
+        String hql = "from Tarifa t join fetch t.tipovehiculo ORDER BY t.idTarifa DESC";
         if (param != null) {
-            hql = "from Turno t join fetch t.tipovehiculo WHERE t.nombreTurno like :param ORDER BY t.idTurno DESC";
+            hql = "from Tarifa t join fetch t.tipovehiculo WHERE t.nombreTarifa like :param ORDER BY t.idTarifa DESC";
         }
         
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -51,14 +51,14 @@ public class ExpertoTurno implements Experto{
     @Override
     public Object find(String param) {
         
-        Turno usuario = null;
+        Tarifa usuario = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Query q = session.createQuery("from Turno t where t.nombreTurno = :name");
+            Query q = session.createQuery("from Tarifa t where t.nombreTarifa = :name");
             q.setString("name", param);
             List resultList = q.list();
-            usuario = (Turno)resultList.get(0);
+            usuario = (Tarifa)resultList.get(0);
             session.getTransaction().commit();
         } catch (HibernateException he) {
             he.printStackTrace();
@@ -68,7 +68,7 @@ public class ExpertoTurno implements Experto{
     
     @Override
     public int persist(Object o, String operation) {
-        Turno u = (Turno)o;
+        Tarifa u = (Tarifa)o;
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -93,7 +93,7 @@ public class ExpertoTurno implements Experto{
 
     @Override
     public int delete(Object o) {
-        Turno u = (Turno)o;
+        Tarifa u = (Tarifa)o;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
